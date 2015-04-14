@@ -10,5 +10,5 @@ package com.epam.rd.transportcompany.entities;
  * @author amd
  */
 public enum OrderStatus {
-    NEW, IN_PROGRESS, CANCELED, COMPLITE 
+    NEW, ACTIVE, CANCELED, COMPLITE 
 }

@@ -6,6 +6,8 @@
 package com.epam.rd.transportcompany.services;
 
 import com.epam.rd.transportcompany.entities.Order;
+import com.epam.rd.transportcompany.entities.OrderStatus;
+import com.epam.rd.transportcompany.entities.User;
 import java.util.List;
 
 /**
@@ -15,5 +17,11 @@ import java.util.List;
 public interface OrderService {
     
     public Long saveOrder(Order order);
-    public List<Order> readAll();
+    public List<Order> getActiveOrders(Integer pageNumber);
+    public List<Order> findByPhone(String phone);
+    public Order findById(Long id);
+
+    public void setDriver(Order order, Long driverId);
+
+    public void setStatus(Order order, OrderStatus orderStatus);
 }

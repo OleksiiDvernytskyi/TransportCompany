@@ -92,6 +92,17 @@ public class JpaUserService implements UserService, UserDetailsService{
         return userDetails;
     }
 
+    @Transactional
+    @Override
+    public List<User> getActiveDrivers(Long passengers, Long cargo) {
+        
+        List<User> userList = userRepository.getActiveDrivers(passengers, cargo);
+        for(User u: userList){
+            u.getCar().getCarId();
+        }
+        return userList;
+    }
+
 
 
    

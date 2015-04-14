@@ -27,8 +27,6 @@ public class Car implements Serializable {
     
     private Long passengers;
     private Long cargo;
-    
-    private boolean isReady;
 
     public Long getCarId() {
         return carId;
@@ -62,14 +60,6 @@ public class Car implements Serializable {
         this.cargo = cargo;
     }
 
-    public boolean isIsReady() {
-        return isReady;
-    }
-
-    public void setIsReady(boolean isReady) {
-        this.isReady = isReady;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -94,7 +84,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "Car{" + "carId=" + carId + ", carModel=" + carModel + ", passengers=" + passengers + ", cargo=" + cargo + ", isReady=" + isReady + '}';
+        return "Car{" + "carId=" + carId + ", carModel=" + carModel + ", passengers=" + passengers + ", cargo=" + cargo + '}';
     }
     
     

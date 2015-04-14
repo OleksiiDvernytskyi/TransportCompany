@@ -8,11 +8,13 @@ package com.epam.rd.transportcompany.controllers;
 import com.epam.rd.transportcompany.entities.Order;
 import com.epam.rd.transportcompany.forms.NewOrderForm;
 import com.epam.rd.transportcompany.services.OrderService;
+import com.epam.rd.transportcompany.services.UserService;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,9 @@ public class NewOrderController {
     @Qualifier("orderService")
     private OrderService orderService;
     
+    @Autowired
+    private UserService userService;
+    
     @ModelAttribute("newOrder")
     public Order construct() {
     return new Order();
@@ -42,7 +47,7 @@ public class NewOrderController {
     }
    
     @RequestMapping(value = "/addorder",method = RequestMethod.POST)
-    public ModelAndView orderAdded(@Valid final NewOrderForm newOrderForm, final BindingResult result, ModelAndView model) {
+    public ModelAndView orderAdded(@Valid final NewOrderForm newOrderForm, final BindingResult result, HttpServletResponse res, ModelAndView model) throws IOException {
 	if (result.hasErrors()) {
             return model;
 	}
@@ -54,9 +59,11 @@ public class NewOrderController {
         order.setCargo(newOrderForm.getCargo());
         
         orderService.saveOrder(order);
+        
         if(order.getOrderId() != null){
-            model.setViewName("orderadded");
-            model.addObject("newOrder", order);
+            
+            res.sendRedirect("editorder.html?o="+order.getOrderId());
+            return null;
         }else{ 
             model.setViewName("error");
             model.addObject("message", "Order not added, something goes wrong");

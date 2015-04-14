@@ -33,6 +33,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String phone;
+    private boolean ready = false;
     private boolean disabled = false;
     //@ManyToOne
     @Enumerated(EnumType.STRING)
@@ -59,6 +60,15 @@ public class User implements Serializable {
         this.phone = phone;
         this.userRole = role;
     }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
 
     public UserRole getUserRole() {
         return userRole;

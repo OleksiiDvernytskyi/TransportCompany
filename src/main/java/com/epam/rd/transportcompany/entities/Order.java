@@ -58,6 +58,7 @@ public class Order implements Serializable {
     public Order() {
         this.status = OrderStatus.NEW;
         this.date = LocalDateTime.now();
+        
     }
 
     

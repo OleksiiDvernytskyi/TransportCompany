@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class JpaUserRepository implements UserRepository{
      
     static final Integer STRINGS_ON_PAGE = 5;
+    static final Integer MAX_NUMBER_RESULTS = 10;
     
     @PersistenceContext(name = "MySql")
     private EntityManager em;
@@ -44,7 +45,7 @@ public class JpaUserRepository implements UserRepository{
     public List<User> readAll(Integer pageNumber) {
         Query query = em.createQuery("SELECT u FROM User u ORDER BY u.username" );
         query.setFirstResult((pageNumber * STRINGS_ON_PAGE));
-        query.setMaxResults(((pageNumber+1) * STRINGS_ON_PAGE));
+        query.setMaxResults(STRINGS_ON_PAGE);
        // query.setParameter("start", );
         //uery.setParameter("end", );
         
@@ -66,6 +67,30 @@ public class JpaUserRepository implements UserRepository{
     @Override
     public void merge(User user) {
         em.merge(user);
+    }
+
+    @Override
+    public List<User> getActiveDrivers(Long passengers, Long cargo) {
+        if(passengers == null ){
+            passengers = 0L;
+        }
+        if(cargo == null){
+            cargo = 0L;
+        }
+        
+        Query query = em.createQuery("SELECT u FROM User u WHERE u.userRole = 'DRIVER' "
+                + "AND u.ready = TRUE AND u.car != NULL AND u.car.cargo >= :cargo "
+                + "AND u.car.passengers >= :passengers  ");
+        query.setParameter("cargo", cargo);
+        query.setParameter("passengers", passengers);
+        query.setMaxResults(MAX_NUMBER_RESULTS);
+        
+        return query.getResultList();
+    }
+
+    @Override
+    public User findById(Long userId) {
+        return em.find(User.class, userId);
     }
 
    

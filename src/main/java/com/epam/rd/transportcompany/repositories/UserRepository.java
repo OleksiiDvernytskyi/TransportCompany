@@ -20,4 +20,8 @@ public interface UserRepository {
     public void merge(User user);
 
     public List<User> readAll(Integer pageNumber);
+
+    public List<User> getActiveDrivers(Long passengers, Long cargo);
+
+    public User findById(Long userId);
 }

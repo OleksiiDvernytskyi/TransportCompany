@@ -22,4 +22,6 @@ public interface UserService {
 
     public List<User> getAllUsers(Integer pageNumber);
 
+    public List<User> getActiveDrivers(Long passengers, Long cargo);
+
 }

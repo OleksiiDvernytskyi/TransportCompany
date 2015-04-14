@@ -13,6 +13,9 @@ import java.util.List;
  * @author amd
  */
 public interface OrderRepository {
-       public Long save(Order order);
-       public List<Order> readAll();
+    
+    public Long save(Order order);
+    public List getActiveOrders(Integer pageNumber);
+    public List<Order> findByPhone(String phone);
+    public Order findById(Long id);
 }

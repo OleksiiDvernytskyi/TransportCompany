@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 
 <%@include file="/WEB-INF/layout/head.jsp" %>  
@@ -17,9 +18,6 @@
 	<h1>Order added !</h1>
            
         <table border="2" cellspacing="1" width ="98%">
-<!--            <tr>
-                <td>id </td><td> ${newOrder.orderId}</td>
-            </tr>-->
            
             <tr>
                 <td><h3>Phone number </h3> </td><td><h4> ${newOrder.phone}</h4></td>
@@ -37,9 +35,10 @@
                  <td><h3>Cargo </h3> </td><td> <h4>${newOrder.cargo}</h4> </td>
             </tr>
             
+            
         </table> 
         
-<!--        Select car: <form name="submitForm" method="get" action="zakaz" id="form1"  class="dropdown-menu">-->
+
            
     </div>
 

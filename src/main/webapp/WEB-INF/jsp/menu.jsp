@@ -31,7 +31,7 @@
 			<h1>Dispatcher</h1>
 			<ul>
 				<li><a href="addorder.html">New order</a></li>
-				<li><a href="index.html">Cancel order</a></li>
+				<li><a href="showactiveorders.html">Active orders</a></li>
 <!--				<li><a href="index.html">semper</a></li>
 				<li><a href="index.html">sociis natoque</a></li>-->
 			</ul>
