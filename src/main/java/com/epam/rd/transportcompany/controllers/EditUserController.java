@@ -10,6 +10,7 @@ import com.epam.rd.transportcompany.forms.EditUserForm;
 import com.epam.rd.transportcompany.services.UserService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +28,9 @@ public class EditUserController {
     @Autowired
     private UserService userService;
     
-//    @ModelAttribute("editUserForm")
-//    public EditUserForm constructForm() {
-//    return new EditUserForm();
-//    }
-//    
+    @Autowired
+    private ShaPasswordEncoder passwordEncoder;
+
     @RequestMapping(value = "/edituser", method = RequestMethod.GET)        
     public ModelAndView editUser(@RequestParam("user")String username, ModelAndView model) {
         
@@ -46,7 +45,7 @@ public class EditUserController {
     
     @RequestMapping(value = "/edituser",method = RequestMethod.POST)
     public ModelAndView useradded(@Valid final EditUserForm editUserForm, final BindingResult result, ModelAndView model) {
-	if (result.hasErrors() || editUserForm.getPassword().length()<3 || 
+	if (result.hasErrors() ||  
                     ! editUserForm.getPassword().equals(editUserForm.getConfirmPassword())) {
             
             return model;
@@ -64,11 +63,9 @@ public class EditUserController {
         user.setUserRole(editUserForm.getRole());
         if( ! editUserForm.getPassword().isEmpty() && editUserForm.getPassword().equals(
                 editUserForm.getConfirmPassword()) ){
-            user.setPassword(editUserForm.getPassword());
+            user.setPassword(passwordEncoder.encodePassword(editUserForm.getPassword(), user.getUsername()));
         }
-        if(user.isDisabled()){
-            user.setPassword("");
-        }
+
         userService.saveUser(user);
         
         model.setViewName("useradded");

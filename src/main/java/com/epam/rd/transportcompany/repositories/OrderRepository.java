@@ -18,4 +18,8 @@ public interface OrderRepository {
     public List getActiveOrders(Integer pageNumber);
     public List<Order> findByPhone(String phone);
     public Order findById(Long id);
+
+    public List<Order> getArchiveOrders(Integer pageNumber);
+
+    public List<Order> getActiveOrdersByUserID(Long userId);
 }

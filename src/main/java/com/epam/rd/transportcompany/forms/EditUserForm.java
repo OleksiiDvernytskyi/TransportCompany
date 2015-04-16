@@ -6,6 +6,7 @@
 package com.epam.rd.transportcompany.forms;
 
 import com.epam.rd.transportcompany.controllers.FieldEquals;
+import com.epam.rd.transportcompany.entities.Car;
 import com.epam.rd.transportcompany.entities.User;
 import com.epam.rd.transportcompany.entities.UserRole;
 import javax.validation.constraints.Size;
@@ -33,7 +34,7 @@ public class EditUserForm {
         private String password;
         private String confirmPassword;
         private UserRole role;
-
+        
     public EditUserForm() {
     }
 
@@ -44,8 +45,11 @@ public class EditUserForm {
         this.firstname = user.getFirstName();
         this.phone = user.getPhone();
         this.role = user.getUserRole();
+        if(user.getCar() != null){
+        }
     }
 
+   
     public String getUsername() {
         return username;
     }

@@ -24,4 +24,8 @@ public interface OrderService {
     public void setDriver(Order order, Long driverId);
 
     public void setStatus(Order order, OrderStatus orderStatus);
+
+    public List<Order> getArchiveOrders(Integer pageNumber);
+
+    public List<Order> getActiveOrdersByUserID(Long userId);
 }

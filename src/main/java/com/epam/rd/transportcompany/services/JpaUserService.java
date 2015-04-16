@@ -8,17 +8,13 @@ package com.epam.rd.transportcompany.services;
 import com.epam.rd.transportcompany.entities.User;
 import com.epam.rd.transportcompany.entities.UserRole;
 import com.epam.rd.transportcompany.repositories.UserRepository;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,16 +26,57 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("userService")
 public class JpaUserService implements UserService, UserDetailsService{
     
-//    @Autowired
-//    PasswordEncoder passwordEncoder;
-//    
+    @Autowired
+    private ShaPasswordEncoder passwordEncoder;
     
     @PostConstruct
-    private void addRoot(){
+    private void addUsers(){
         User user = new User();
         user.setUsername("root");
-        user.setPassword("root");
+        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
         user.setUserRole(UserRole.ADMIN);
+        saveUser(user);
+        
+        user = new User();
+        user.setUsername("dis1");
+        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
+        user.setUserRole(UserRole.DISPATCHER);
+        saveUser(user);
+        
+        user = new User();
+        user.setUsername("dis2");
+        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
+        user.setUserRole(UserRole.DISPATCHER);
+        saveUser(user);
+        
+        user = new User();
+        user.setUsername("driver1");
+        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
+        user.setUserRole(UserRole.DRIVER);
+        saveUser(user);
+        
+        user = new User();
+        user.setUsername("driver2");
+        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
+        user.setUserRole(UserRole.DRIVER);
+        saveUser(user);
+        
+        user = new User();
+        user.setUsername("driver3");
+        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
+        user.setUserRole(UserRole.DRIVER);
+        saveUser(user);
+        
+        user = new User();
+        user.setUsername("driver4");
+        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
+        user.setUserRole(UserRole.DRIVER);
+        saveUser(user);
+        
+        user = new User();
+        user.setUsername("driver5");
+        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
+        user.setUserRole(UserRole.DRIVER);
         saveUser(user);
     }
     
@@ -72,8 +109,13 @@ public class JpaUserService implements UserService, UserDetailsService{
 
     @Override
     public User findByName(String username) {
-        
-        return userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+        if(user != null){
+            if( user.getCar() != null){
+                user.getCar().getCarId();
+            }
+        }
+        return user; 
     }
     
     @Override
@@ -84,10 +126,8 @@ public class JpaUserService implements UserService, UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user =  findByName(username);
-        Set<GrantedAuthority> roles = new HashSet();
-        roles.add(new SimpleGrantedAuthority(user.getUserRole().name()));
          
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),roles );
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
        
         return userDetails;
     }
@@ -100,6 +140,7 @@ public class JpaUserService implements UserService, UserDetailsService{
         for(User u: userList){
             u.getCar().getCarId();
         }
+        
         return userList;
     }
 

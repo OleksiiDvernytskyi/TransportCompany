@@ -35,8 +35,8 @@ public class ShowActiveOrdersController {
     return new OrderSearchForm();
     }
     
-    @RequestMapping(value = "/showactiveorders", method = RequestMethod.GET)        
-    public ModelAndView showOrders(@RequestParam (value ="p", required = false) Integer pageNumber, ModelAndView model) {
+    @RequestMapping(value = "showactiveorders", method = RequestMethod.GET)        
+    public ModelAndView showActiveOrders(@RequestParam (value ="p", required = false) Integer pageNumber, ModelAndView model) {
         
         if(pageNumber ==null ){
             pageNumber = 0;
@@ -58,11 +58,12 @@ public class ShowActiveOrdersController {
         return model;
     }
     
-    @RequestMapping(value = "/showactiveorders", method = RequestMethod.POST)        
+    
+    @RequestMapping(value = "showactiveorders", method = RequestMethod.POST)        
     public ModelAndView searchUser(@Valid final OrderSearchForm orderSearchForm, final BindingResult result, ModelAndView model) {
         
         if(orderSearchForm.getPhone().length() < 3){
-            showOrders(0, model);
+            showActiveOrders(0, model);
             return model;
         }
         

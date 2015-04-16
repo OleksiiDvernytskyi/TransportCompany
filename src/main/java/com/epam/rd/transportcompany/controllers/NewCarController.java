@@ -26,9 +26,9 @@ public class NewCarController {
     @Qualifier("carService")
     private CarService carService;
     
-    @ModelAttribute("newCar")
-    public Car construct() {
-    return new Car();
+    @ModelAttribute("newCarForm")
+    public NewCarForm construct() {
+    return new NewCarForm();
  }
     
     @RequestMapping(value = "/addcar", method = RequestMethod.GET)        
@@ -42,6 +42,11 @@ public class NewCarController {
 	if (result.hasErrors()) {
             return model;
 	}
+        
+         if(carService.findByName(newCarForm.getCarModel().trim()) != null ){
+            result.rejectValue("carModel", "error.newCarForm", "Car model already exists");
+            return model;
+        }
         
         Car newCar = new Car();
         newCar.setCarModel(newCarForm.getCarModel());

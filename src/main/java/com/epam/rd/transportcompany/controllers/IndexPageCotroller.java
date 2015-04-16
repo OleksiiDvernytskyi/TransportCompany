@@ -24,20 +24,22 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexPageCotroller {
 
-    @ModelAttribute("loginForm")
-    public LoginForm constructForm() {
-    return new LoginForm();
+    @ModelAttribute("userRole")
+    public String userRole() {
+    return  ""+SecurityContextHolder.getContext().getAuthentication().getAuthorities();
     }
     
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView model){
         
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        String name = auth.getName();
-//        if (auth.isAuthenticated() && !name.equals("anonymousUser")){
-//            model.setViewName("welcome");
-//            model.addObject("username", name);
-//        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        String role = auth.getAuthorities().toString();
+        if (auth.isAuthenticated() && !name.equals("anonymousUser")){
+            model.setViewName("welcome");
+            model.addObject("username", name);
+            model.addObject("role", role);
+        }
         
         return model;
     }
@@ -57,4 +59,10 @@ public class IndexPageCotroller {
         return model;
     }
     
+    @RequestMapping(value = "/signin-failure", method = RequestMethod.GET)
+	public ModelAndView signinFailure(ModelAndView model) {
+		model.addObject("message", "Incorrect login or password");
+                model.setViewName("error");
+                return model;
+	}
 }

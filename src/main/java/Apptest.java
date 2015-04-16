@@ -38,12 +38,12 @@ public class Apptest {
 
        UserService userService = appContext.getBean("userService", UserService.class);
         
-        User user1 = new User("root", "123456", "0672380835", UserRole.ADMIN);
-        System.out.println(user1);
-        
-        userService.saveUser(user1);
-        
-        System.out.println(user1);
+//        User user1 = new User("root", "123456", "0672380835", UserRole.ADMIN);
+//        System.out.println(user1);
+//        
+//        userService.saveUser(user1);
+//        
+//        System.out.println(user1);
     }
     
 }

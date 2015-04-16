@@ -10,6 +10,7 @@ import com.epam.rd.transportcompany.entities.User;
 import com.epam.rd.transportcompany.services.UserService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,9 @@ public class NewUserController {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private ShaPasswordEncoder passwordEncoder;
+    
     @ModelAttribute("newUserForm")
     public NewUserForm constructForm() {
     return new NewUserForm();
@@ -47,6 +51,11 @@ public class NewUserController {
             return model;
 	}
         
+        if(userService.findByName(newUserForm.getUsername().trim()) != null ){
+            result.rejectValue("username", "error.newUserForm", "Username already exists");
+            return model;
+        }
+        
         User newUser = new User();
 
         newUser.setUsername(newUserForm.getUsername());
@@ -54,9 +63,9 @@ public class NewUserController {
         newUser.setLastName(newUserForm.getLastname());
         newUser.setPhone(newUserForm.getPhone());
         newUser.setUserRole(newUserForm.getRole());
-        newUser.setPassword(newUserForm.getPassword());
+       
+        newUser.setPassword(passwordEncoder.encodePassword(newUserForm.getPassword(), newUser.getUsername()));
       
-        
         if(userService.saveUser(newUser) != null){
             model.setViewName("useradded");
             model.addObject("newUser", newUser);

@@ -10,6 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -19,15 +20,18 @@ import org.hibernate.validator.constraints.NotBlank;
 public class NewOrderForm {
     
     @NotBlank
+    @Size(min = 9, max=14)
     private String phone;
     
     @NotBlank
+    @Size(max=25)
     private String fromWhere;
+    @Size(max=25)
     private String toWhere;
     
     @DecimalMax(value = "100" )
     private Long passengers;
-    @DecimalMax(value = "100" )
+    @DecimalMax(value = "1000" )
     private Long cargo;
 
     public String getPhone() {

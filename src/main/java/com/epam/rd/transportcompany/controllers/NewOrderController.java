@@ -35,18 +35,18 @@ public class NewOrderController {
     @Autowired
     private UserService userService;
     
-    @ModelAttribute("newOrder")
-    public Order construct() {
-    return new Order();
+    @ModelAttribute("newOrderForm")
+    public NewOrderForm construct() {
+    return new NewOrderForm();
  }
     
-    @RequestMapping(value = "/addorder", method = RequestMethod.GET)        
+    @RequestMapping(value = "addorder", method = RequestMethod.GET)        
     public ModelAndView addOrder(ModelAndView model) {
 
         return model;
     }
    
-    @RequestMapping(value = "/addorder",method = RequestMethod.POST)
+    @RequestMapping(value = "addorder",method = RequestMethod.POST)
     public ModelAndView orderAdded(@Valid final NewOrderForm newOrderForm, final BindingResult result, HttpServletResponse res, ModelAndView model) throws IOException {
 	if (result.hasErrors()) {
             return model;
@@ -62,7 +62,7 @@ public class NewOrderController {
         
         if(order.getOrderId() != null){
             
-            res.sendRedirect("editorder.html?o="+order.getOrderId());
+            res.sendRedirect("editOrder.html?o="+order.getOrderId());
             return null;
         }else{ 
             model.setViewName("error");

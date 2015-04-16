@@ -16,6 +16,10 @@ public interface CarRepository {
     
     public Long save(Car car);
     public List<Car> readAll();
+
+    public Car findByIg(Long carId);
+
+    public Car findByName(String name);
     
     
 }

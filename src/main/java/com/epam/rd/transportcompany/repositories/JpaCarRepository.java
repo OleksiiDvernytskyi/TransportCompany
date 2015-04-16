@@ -9,6 +9,7 @@ import com.epam.rd.transportcompany.entities.Car;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +23,6 @@ public class JpaCarRepository implements CarRepository{
     @PersistenceContext(name = "MySql")
     private EntityManager em;
     
-    @Transactional
     @Override
     public Long save(Car car) {
         em.persist(car);
@@ -31,6 +31,23 @@ public class JpaCarRepository implements CarRepository{
 
     @Override
     public List<Car> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = em.createQuery("SELECT u FROM Car u ORDER BY u.carModel");
+        return query.getResultList();
+    }
+
+    @Override
+    public Car findByIg(Long carId) {
+        return em.find(Car.class, carId);
+    }
+
+    @Override
+    public Car findByName(String name) {
+        Query query = em.createQuery("SELECT u FROM Car u WHERE u.carModel =:name");
+        query.setParameter("name", name);
+        List<Car> list = query.getResultList();
+        if( !list.isEmpty() ){
+            return list.get(0);
+        }
+        return null;
     }
 }

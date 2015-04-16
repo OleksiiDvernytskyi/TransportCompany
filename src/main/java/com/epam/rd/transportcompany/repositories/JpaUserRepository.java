@@ -6,6 +6,7 @@
 package com.epam.rd.transportcompany.repositories;
 
 import com.epam.rd.transportcompany.entities.User;
+import com.epam.rd.transportcompany.entities.UserRole;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;

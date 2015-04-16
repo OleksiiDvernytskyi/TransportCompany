@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.*;
 @FieldEquals( field="password", equalsTo="confirmPassword" )
 public class NewUserForm {
 	@NotBlank
-        @Size(min=3, max=16)
+        @Size(min=3, max=20)
         private String username;
 	
         @NotBlank

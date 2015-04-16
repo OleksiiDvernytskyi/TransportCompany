@@ -7,6 +7,7 @@ package com.epam.rd.transportcompany.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,8 @@ public class Car implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long carId;
-
+    
+    @Column(unique = true)
     private String carModel;
     
     private Long passengers;

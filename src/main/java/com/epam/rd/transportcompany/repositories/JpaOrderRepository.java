@@ -36,7 +36,7 @@ public class JpaOrderRepository implements OrderRepository{
 
     @Override
     public List getActiveOrders(Integer pageNumber) {
-        Query query = em.createQuery("SELECT o FROM Order o WHERE o.status ='ACTIVE' OR o.status ='NEW' ORDER BY o.date " );
+        Query query = em.createQuery("SELECT o FROM Order o WHERE o.status ='ACTIVE' OR o.status ='NEW' ORDER BY o.date DESC " );
         query.setFirstResult((pageNumber * STRINGS_ON_PAGE));
         query.setMaxResults(STRINGS_ON_PAGE);
         
@@ -45,7 +45,7 @@ public class JpaOrderRepository implements OrderRepository{
 
     @Override
     public List<Order> findByPhone(String phone) {
-        Query query = em.createQuery("SELECT o FROM Order o WHERE o.phone LIKE :phone AND ( o.status ='ACTIVE' OR o.status ='NEW') ORDER BY o.date " );
+        Query query = em.createQuery("SELECT o FROM Order o WHERE o.phone LIKE :phone AND ( o.status ='ACTIVE' OR o.status ='NEW') ORDER BY o.date DESC " );
         query.setParameter("phone", "%" + phone + "%");
         
         return query.getResultList();
@@ -54,6 +54,23 @@ public class JpaOrderRepository implements OrderRepository{
     @Override
     public Order findById(Long id) {
         return em.find(Order.class, id);
+    }
+
+    @Override
+    public List<Order> getArchiveOrders(Integer pageNumber) {
+        Query query = em.createQuery("SELECT o FROM Order o WHERE o.status ='COMPLITE' OR o.status ='CANCELED' ORDER BY o.date DESC" );
+        query.setFirstResult((pageNumber * STRINGS_ON_PAGE));
+        query.setMaxResults(STRINGS_ON_PAGE);
+        
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Order> getActiveOrdersByUserID(Long userId) {
+        Query query = em.createQuery("SELECT o FROM Order o WHERE (o.status ='ACTIVE' OR o.status ='NEW') AND o.driver.userId = :userId " );
+        query.setParameter("userId", userId);
+        
+        return query.getResultList();
     }
     
 }

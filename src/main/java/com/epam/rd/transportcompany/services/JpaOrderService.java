@@ -85,5 +85,25 @@ public class JpaOrderService implements OrderService{
        order.setStatus(orderStatus);
         saveOrder(order);
     }
+
+    @Override
+    public List<Order> getArchiveOrders(Integer pageNumber) {
+        
+        List<Order> orderList = orderRepository.getArchiveOrders(pageNumber);
+        
+        for(Order o: orderList){
+            if(o.getDriver() != null){
+                o.getDriver().getUsername();
+            }
+            
+        }
+        
+       return orderList;
+    }
+
+    @Override
+    public List<Order> getActiveOrdersByUserID(Long userId) {
+        return orderRepository.getActiveOrdersByUserID(userId);
+    }
     
 }

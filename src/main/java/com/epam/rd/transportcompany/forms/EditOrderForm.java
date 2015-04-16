@@ -23,6 +23,7 @@ public class EditOrderForm {
     private Long cargo;
     private boolean canceled = false;   
     private OrderStatus status;
+    private boolean complite = false;
     
     private Long driverId;
 
@@ -38,6 +39,14 @@ public class EditOrderForm {
         this.cargo = order.getCargo();
         this.status = order.getStatus();
         
+    }
+
+    public boolean isComplite() {
+        return complite;
+    }
+
+    public void setComplite(boolean complite) {
+        this.complite = complite;
     }
 
     public boolean isCanceled() {

@@ -7,7 +7,7 @@ package com.epam.rd.transportcompany.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,10 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
+
 
 /**
  *
@@ -35,21 +32,16 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
     
-    @NotBlank
     private String phone;
-    
-    @NotBlank
     private String fromWhere;
     private String toWhere;
-   // @ManyToOne
+
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    @DecimalMax(value = "100" )
     private Long passengers;
-    @DecimalMax(value = "1000" )
     private Long cargo;
-    
     private LocalDateTime date;
+    
     
     @ManyToOne
     @JoinColumn(name =  "userId")
@@ -57,6 +49,7 @@ public class Order implements Serializable {
 
     public Order() {
         this.status = OrderStatus.NEW;
+        //this.date = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE);
         this.date = LocalDateTime.now();
         
     }

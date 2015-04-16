@@ -6,6 +6,9 @@
 package com.epam.rd.transportcompany.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,6 +18,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -22,12 +28,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name ="users")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(unique = true)
     private String username;
     private String password;
     private String firstName;
@@ -35,7 +42,6 @@ public class User implements Serializable {
     private String phone;
     private boolean ready = false;
     private boolean disabled = false;
-    //@ManyToOne
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     
@@ -54,13 +60,7 @@ public class User implements Serializable {
     public User(){
         
     }
-    public User(String username, String password, String phone, UserRole role) {
-        this.username = username;
-        this.password = password;
-        this.phone = phone;
-        this.userRole = role;
-    }
-
+    
     public boolean isReady() {
         return ready;
     }
@@ -73,7 +73,7 @@ public class User implements Serializable {
     public UserRole getUserRole() {
         return userRole;
     }
-
+    
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
@@ -157,6 +157,37 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" + "id=" + userId + ", username=" + username + ", name=" + firstName + ", secondName=" + lastName + '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        
+        HashSet<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(("ROLE_"+getUserRole()));
+        authorities.add(grantedAuthority);
+        
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !isDisabled() ;
     }
 
    

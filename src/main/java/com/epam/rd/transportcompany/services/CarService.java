@@ -13,8 +13,9 @@ import java.util.List;
  * @author a
  */
 public interface CarService {
-    public Car newCar();
     public Long saveCar(Car car);
     public List<Car> readAll();
     public Car findByName(String name);
+
+    public Car findById(Long carId);
 }

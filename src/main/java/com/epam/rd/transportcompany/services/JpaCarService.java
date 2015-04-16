@@ -10,6 +10,7 @@ import com.epam.rd.transportcompany.repositories.CarRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -21,11 +22,7 @@ public class JpaCarService implements CarService{
     @Autowired 
     private CarRepository carRepository;
 
-    @Override
-    public Car newCar(){
-        return new Car();
-    }
-    
+    @Transactional
     @Override
     public Long saveCar(Car car) {
         return carRepository.save(car);
@@ -33,12 +30,19 @@ public class JpaCarService implements CarService{
 
     @Override
     public List<Car> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return carRepository.readAll();
     }
 
+    @Transactional
     @Override
     public Car findByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return carRepository.findByName(name);
+    }
+
+    @Transactional
+    @Override
+    public Car findById(Long carId) {
+        return carRepository.findByIg(carId);
     }
     
 }
