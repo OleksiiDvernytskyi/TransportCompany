@@ -9,7 +9,11 @@
 		</div>
 
 		<div class="sidenav">
-
+                       
+                                    <a href="?lang=en">en</a> 
+                                         | 
+                                    <a href="?lang=ru">ru</a>
+                          
 			<jsp:include page="menu.jsp"/>
 
 		</div>

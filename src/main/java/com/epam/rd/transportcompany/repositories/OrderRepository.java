@@ -15,11 +15,20 @@ import java.util.List;
 public interface OrderRepository {
     
     public Long save(Order order);
-    public List getActiveOrders(Integer pageNumber);
-    public List<Order> findByPhone(String phone);
+    
+    public List getActiveOrders(Integer pageNumber, String phone);
+    
+//    public List<Order> findByPhone(String phone);
+    
     public Order findById(Long id);
 
-    public List<Order> getArchiveOrders(Integer pageNumber);
+    public List<Order> getArchiveOrders(Integer pageNumber, String phone);
 
     public List<Order> getActiveOrdersByUserID(Long userId);
+
+//    public List<Order> findArchiveOrdersByPhone(String phone);
+
+    public Long getActivePagesCount(String phone);
+    
+    public Long getArchivePagesCount(String phone);
 }

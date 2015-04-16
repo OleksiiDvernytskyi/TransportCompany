@@ -6,10 +6,12 @@
 package com.epam.rd.transportcompany.controllers;
 
 import com.epam.rd.transportcompany.entities.Order;
+import com.epam.rd.transportcompany.entities.OrderStatus;
 import com.epam.rd.transportcompany.forms.NewOrderForm;
 import com.epam.rd.transportcompany.services.OrderService;
 import com.epam.rd.transportcompany.services.UserService;
 import java.io.IOException;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +40,27 @@ public class NewOrderController {
     @ModelAttribute("newOrderForm")
     public NewOrderForm construct() {
     return new NewOrderForm();
- }
+    }
+    
+    
+//    public void addorders(){
+//       Order order;
+//        for(int i=0; i<60; i++){
+//            order = new Order();
+//            
+//            order.setPhone("098"+(int)(Math.random()*8899999+1000000));
+//            order.setFromWhere("малая Арнаутская " +(int)(Math.random()*100));
+//           // order.setDriver(userService.getUserById((long)(Math.random()*5+4)));
+//            order.setStatus(OrderStatus.);
+//            
+//            orderService.saveOrder(order);
+//        }
+//    }
+    
     
     @RequestMapping(value = "addorder", method = RequestMethod.GET)        
     public ModelAndView addOrder(ModelAndView model) {
-
+            
         return model;
     }
    
@@ -62,11 +80,11 @@ public class NewOrderController {
         
         if(order.getOrderId() != null){
             
-            res.sendRedirect("editOrder.html?o="+order.getOrderId());
+            res.sendRedirect("editorder.html?o="+order.getOrderId());
             return null;
         }else{ 
             model.setViewName("error");
-            model.addObject("message", "Order not added, something goes wrong");
+            model.addObject("message", "order_not");
         }
         
         return model;

@@ -26,60 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("userService")
 public class JpaUserService implements UserService, UserDetailsService{
     
-    @Autowired
-    private ShaPasswordEncoder passwordEncoder;
-    
-    @PostConstruct
-    private void addUsers(){
-        User user = new User();
-        user.setUsername("root");
-        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
-        user.setUserRole(UserRole.ADMIN);
-        saveUser(user);
-        
-        user = new User();
-        user.setUsername("dis1");
-        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
-        user.setUserRole(UserRole.DISPATCHER);
-        saveUser(user);
-        
-        user = new User();
-        user.setUsername("dis2");
-        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
-        user.setUserRole(UserRole.DISPATCHER);
-        saveUser(user);
-        
-        user = new User();
-        user.setUsername("driver1");
-        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
-        user.setUserRole(UserRole.DRIVER);
-        saveUser(user);
-        
-        user = new User();
-        user.setUsername("driver2");
-        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
-        user.setUserRole(UserRole.DRIVER);
-        saveUser(user);
-        
-        user = new User();
-        user.setUsername("driver3");
-        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
-        user.setUserRole(UserRole.DRIVER);
-        saveUser(user);
-        
-        user = new User();
-        user.setUsername("driver4");
-        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
-        user.setUserRole(UserRole.DRIVER);
-        saveUser(user);
-        
-        user = new User();
-        user.setUsername("driver5");
-        user.setPassword(passwordEncoder.encodePassword("root", user.getUsername()));
-        user.setUserRole(UserRole.DRIVER);
-        saveUser(user);
-    }
-    
     @Autowired 
     private UserRepository userRepository;
    
@@ -107,6 +53,7 @@ public class JpaUserService implements UserService, UserDetailsService{
         return userRepository.readAll();
     }
 
+    @Transactional
     @Override
     public User findByName(String username) {
         User user = userRepository.findByUsername(username);
@@ -118,9 +65,10 @@ public class JpaUserService implements UserService, UserDetailsService{
         return user; 
     }
     
+    @Transactional
     @Override
     public User getUserById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return userRepository.findById(id);
     }
 
     @Override
@@ -138,7 +86,7 @@ public class JpaUserService implements UserService, UserDetailsService{
         
         List<User> userList = userRepository.getActiveDrivers(passengers, carCategory);
         for(User u: userList){
-            u.getCar().getCarId();
+            u.getCar().getBrend().getBrendId();
         }
         
         return userList;

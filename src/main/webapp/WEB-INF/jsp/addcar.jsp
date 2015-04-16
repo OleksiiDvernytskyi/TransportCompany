@@ -4,6 +4,7 @@
     Author     : amd
 --%>
 
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" type="text/css" href="resources/css/default.css" media="screen"/>
@@ -26,30 +27,39 @@
     <body>
         <form:form commandName="newCarForm" method="post" >
 
-<center><h1>New car</h1></center>
+<center><h1><spring:message code="new_car"/></h1></center>
 
 <table width="98%">
+    <tr><td><span class="error"><form:errors path="brendId" /></span></td></tr>
+    <tr>
+        <td><h5> <spring:message code="car_brend"/>: </h5></td> <td><form:select path="brendId" >
+                                                <form:option value="0" label="--- Select ---" />
+                                                <form:options items="${carBrends}" />
+                                            </form:select>
+        </td>
+             
+    </tr>
     <tr><td><span class="error"><form:errors path="carModel" /></span></td></tr>
     <tr>
-        <td><h5> Car Model *: </h5></td> <td><form:input path="carModel" /></td>
+        <td><h5> <spring:message code="car_model"/> *: </h5></td> <td><form:input path="carModel" /></td>
              
     </tr>
     <tr><td><span class="error"><form:errors path="passengers" /></span></td></tr>
     <tr>
-        <td><h5>  Passengers *: </h5></td><td><form:input path="passengers" /></td>
+        <td><h5>  <spring:message code="passengers"/> *: </h5></td><td><form:input path="passengers" /></td>
             
     </tr>
     <tr><td><span class="error"><form:errors path="carCategory" /></span></td></tr>
     <tr>
-        <td><h5>  CarCategory *: </h5></td><td><form:input path="carCategory" /></td>
+        <td><h5>  <spring:message code="car_cat"/> *: </h5></td><td><form:input path="carCategory" /></td>
             
     </tr>
 
 </table>
 <p>
-* Required Fields
+* <spring:message code="req_fields"/>
 </p>
-        <center><input type="submit" value="Submit" /> </center>   
+        <center><input type="submit" value="<spring:message code="submit"/>" /> </center>   
 <!--                <input type="reset" value="Reset"  />-->
 
 </form:form>

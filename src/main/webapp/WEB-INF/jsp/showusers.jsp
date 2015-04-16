@@ -4,6 +4,7 @@
     Author     : a
 --%>
 
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.epam.rd.transportcompany.entities.User"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -16,22 +17,22 @@
  
     <div class="item">
         
-        <h1>Users  <table align="right"> 
+        <h1><spring:message code="users"/> <table align="right"> 
             <tr><td><a href="showusers.html?p=${pageNumber -1}">Prev</a></td><td>${pageNumber}</td><td><a href="showusers.html?p=${pageNumber +1}">Next</a></td></tr>
                         </table></h1>
             <form:form commandName="userSearchForm" method="post">
                 <table>        
-                    <td><h3>Find by username : </h3> </td><td><form:input path="username"/></td><td><input type="submit" value="Search" /></td>
+                    <td><h3><spring:message code="find_by_user"/> : </h3> </td><td><form:input path="username"/></td><td><input type="submit" value="<spring:message code="search"/>" /></td>
             
                 </table>
             </form:form>
         <table border="2" cellspacing="1" width = "98%" align="centre">
             
              <tr>
-                 <td><h3>  Username </h3></td>
-                        <td><h3>  Firstname </h3></td>
-                            <td><h3>  Lastname  </h3></td>
-                                <td><h3>  User role  </h3></td>
+                 <td><h3> <spring:message code="username"/> </h3></td>
+                        <td><h3> <spring:message code="fname"/> </h3></td>
+                            <td><h3> <spring:message code="lname"/> </h3></td>
+                                <td><h3> <spring:message code="u_role"/> </h3></td>
             </tr>
        <c:forEach items = "${userList}" var="user" >
             <tr>

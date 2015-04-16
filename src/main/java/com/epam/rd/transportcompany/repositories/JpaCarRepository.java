@@ -31,7 +31,7 @@ public class JpaCarRepository implements CarRepository{
 
     @Override
     public List<Car> readAll() {
-        Query query = em.createQuery("SELECT u FROM Car u ORDER BY u.carModel");
+        Query query = em.createNamedQuery("Car.readAll");
         return query.getResultList();
     }
 
@@ -42,7 +42,7 @@ public class JpaCarRepository implements CarRepository{
 
     @Override
     public Car findByName(String name) {
-        Query query = em.createQuery("SELECT u FROM Car u WHERE u.carModel =:name");
+        Query query = em.createNamedQuery("Car.findByModel");
         query.setParameter("name", name);
         List<Car> list = query.getResultList();
         if( !list.isEmpty() ){

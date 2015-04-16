@@ -6,9 +6,7 @@
 package com.epam.rd.transportcompany.repositories;
 
 import com.epam.rd.transportcompany.entities.User;
-import com.epam.rd.transportcompany.entities.UserRole;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -22,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository("userRepository")
 public class JpaUserRepository implements UserRepository{
      
-    static final Integer STRINGS_ON_PAGE = 5;
-    static final Integer MAX_NUMBER_RESULTS = 10;
+    static final Integer STRINGS_ON_PAGE = 20;
+    static final Integer MAX_NUMBER_RESULTS = 15;
     
     @PersistenceContext(name = "MySql")
     private EntityManager em;
@@ -37,25 +35,23 @@ public class JpaUserRepository implements UserRepository{
 
     @Override
     public List<User> readAll() {
-        Query query = em.createQuery("SELECT u FROM User u ORDER BY u.username");
+        Query query = em.createNamedQuery("User.readAll");
         
         return query.getResultList();
     }
     
     @Override
     public List<User> readAll(Integer pageNumber) {
-        Query query = em.createQuery("SELECT u FROM User u ORDER BY u.username" );
+        Query query = em.createNamedQuery("User.readAll");
         query.setFirstResult((pageNumber * STRINGS_ON_PAGE));
         query.setMaxResults(STRINGS_ON_PAGE);
-       // query.setParameter("start", );
-        //uery.setParameter("end", );
-        
+ 
         return query.getResultList();
     }
     
     @Override
     public User findByUsername(String username) {
-        Query query = em.createQuery("SELECT u FROM User u WHERE u.username = :username ");
+        Query query = em.createNamedQuery("User.findByUsername");
         query.setParameter("username", username );
         List<User> userList = query.getResultList();
         
@@ -79,9 +75,7 @@ public class JpaUserRepository implements UserRepository{
             carCategory = 0L;
         }
         
-        Query query = em.createQuery("SELECT u FROM User u WHERE u.userRole = 'DRIVER' "
-                + "AND u.ready = TRUE AND u.car != NULL AND u.car.carCategory >= :carCategory "
-                + "AND u.car.passengers >= :passengers  ");
+        Query query = em.createNamedQuery("User.getActiveDrivers");
         query.setParameter("carCategory", carCategory);
         query.setParameter("passengers", passengers);
         query.setMaxResults(MAX_NUMBER_RESULTS);

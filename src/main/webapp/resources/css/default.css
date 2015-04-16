@@ -132,6 +132,7 @@ h5{
 .main {
 	clear: both;
 	padding: 8px 18px;
+        min-height: 650px;
 }
 
 /* main left */

@@ -38,14 +38,9 @@ public class ShowUsersController {
     @RequestMapping(value = "/showusers", method = RequestMethod.GET)        
     public ModelAndView showUsers(@RequestParam (value ="p", required = false) Integer pageNumber, ModelAndView model) {
         
-        if(pageNumber ==null ){
+        if(pageNumber ==null || pageNumber< 0){
             pageNumber = 0;
         }
-        if(pageNumber< 0){
-            pageNumber =0;
-        }
-        
-        
         
         List<User> userList = userService.getAllUsers(pageNumber);
        

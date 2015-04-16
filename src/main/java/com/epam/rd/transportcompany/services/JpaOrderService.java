@@ -32,11 +32,18 @@ public class JpaOrderService implements OrderService{
     public Long saveOrder(Order order) {
         return orderRepository.save(order);
     }
-
     @Transactional
     @Override
-    public List<Order> getActiveOrders(Integer pageNumber) {
-        List<Order> orderList = orderRepository.getActiveOrders(pageNumber);
+    public List<Order> getActiveOrders(Integer pageNumber){
+        return getActiveOrders(pageNumber, null);
+    }
+    
+    @Transactional
+    @Override
+    public List<Order> getActiveOrders(Integer pageNumber, String phone ) {
+        if(phone == null) 
+            phone = "";
+        List<Order> orderList = orderRepository.getActiveOrders(pageNumber, phone);
         
         for(Order o: orderList){
             if(o.getDriver() != null){
@@ -46,19 +53,6 @@ public class JpaOrderService implements OrderService{
         }
         
        return orderList;
-    }
-    
-    @Transactional
-    @Override
-    public List findByPhone(String phone) {
-         List<Order> orderList = orderRepository.findByPhone(phone);
-         
-        for(Order o: orderList){
-            if(o.getDriver() != null){
-                o.getDriver().getUsername();
-            }
-        }
-        return orderList;
     }
 
     @Transactional
@@ -85,11 +79,18 @@ public class JpaOrderService implements OrderService{
        order.setStatus(orderStatus);
         saveOrder(order);
     }
-
+    
     @Override
-    public List<Order> getArchiveOrders(Integer pageNumber) {
-        
-        List<Order> orderList = orderRepository.getArchiveOrders(pageNumber);
+    public List<Order> getArchiveOrders(Integer pageNumber){
+        return getArchiveOrders(pageNumber, "");
+    }
+    
+    @Transactional
+    @Override
+    public List<Order> getArchiveOrders(Integer pageNumber, String phone ) {
+        if(phone == null) 
+            phone = "";
+        List<Order> orderList = orderRepository.getArchiveOrders(pageNumber, phone );
         
         for(Order o: orderList){
             if(o.getDriver() != null){
@@ -100,10 +101,37 @@ public class JpaOrderService implements OrderService{
         
        return orderList;
     }
-
+    @Transactional
     @Override
     public List<Order> getActiveOrdersByUserID(Long userId) {
         return orderRepository.getActiveOrdersByUserID(userId);
     }
     
+//    @Override
+//    public List<Order> findArchiveOrdersByPhone(String phone) {
+//          List<Order> orderList = orderRepository.findArchiveOrdersByPhone(phone);
+//         
+//        for(Order o: orderList){
+//            if(o.getDriver() != null){
+//                o.getDriver().getUsername();
+//            }
+//        }
+//        return orderList;
+//    }
+
+    @Transactional
+    @Override
+    public Long getActivePagesCount(String phone) {
+        if(phone == null)
+            phone= "";
+        return orderRepository.getActivePagesCount(phone);
+    }
+    
+    @Transactional
+    @Override
+    public Long getArchivePagesCount(String phone) {
+        if(phone == null)
+            phone= "";
+        return orderRepository.getArchivePagesCount(phone);
+    }
 }

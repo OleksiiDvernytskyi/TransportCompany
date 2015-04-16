@@ -5,6 +5,7 @@
  */
 package com.epam.rd.transportcompany.forms;
 
+import com.epam.rd.transportcompany.entities.CarBrend;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 
@@ -15,7 +16,7 @@ import org.hibernate.validator.constraints.*;
 public class NewCarForm {
     
     @NotBlank
-    @Size(min=3, max=20)
+    @Size(min=2, max=20)
     private String carModel;
     
     @Range(min = 1, max = 20)
@@ -23,6 +24,16 @@ public class NewCarForm {
     
     @Range(min = 1, max = 10)
     private Long carCategory;
+
+    private Long brendId;
+
+    public Long getBrendId() {
+        return brendId;
+    }
+
+    public void setBrendId(Long brendId) {
+        this.brendId = brendId;
+    }
 
     public String getCarModel() {
         return carModel;

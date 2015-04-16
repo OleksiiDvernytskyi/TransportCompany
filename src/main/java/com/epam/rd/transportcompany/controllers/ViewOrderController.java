@@ -24,17 +24,17 @@ public class ViewOrderController {
     @Autowired
     private OrderService orderService;
     
-    @RequestMapping(value = "/viewOrder", method = RequestMethod.GET)
+    @RequestMapping(value = "/vieworder", method = RequestMethod.GET)
 	public ModelAndView signinFailure(@RequestParam( "o")Long orderId, ModelAndView model) {
             Order order = orderService.findById(orderId);  
             if(order  == null){
-                model.addObject("message", "Incorrect order number");
+                model.addObject("message", "incorr_numb");
                 model.setViewName("error");
                 return model;
             }
             
             model.addObject("order", order);
-            model.setViewName("viewOrder");
+            model.setViewName("vieworder");
             return model;
 	}
 }

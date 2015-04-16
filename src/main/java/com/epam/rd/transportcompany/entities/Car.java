@@ -12,12 +12,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author a
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Car.readAll",
+            query = "SELECT u FROM Car u ORDER BY u.brend.brendName"),
+    @NamedQuery(name = "Car.findByModel",
+            query = "SELECT u FROM Car u WHERE u.carModel =:name"),
+})
 public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -27,8 +37,20 @@ public class Car implements Serializable {
     @Column(unique = true)
     private String carModel;
     
+    @ManyToOne
+    @JoinColumn(name = "brendId")
+    private CarBrend brend;
+    
     private Long passengers;
     private Long carCategory;
+
+    public CarBrend getBrend() {
+        return brend;
+    }
+
+    public void setBrend(CarBrend brend) {
+        this.brend = brend;
+    }
 
     public Long getCarId() {
         return carId;

@@ -38,7 +38,7 @@ public class EditOrderController {
     @Autowired
     private UserService userService;
     
-    @RequestMapping(value = "/editOrder", method = RequestMethod.GET)        
+    @RequestMapping(value = "/editorder", method = RequestMethod.GET)        
     public ModelAndView editOrder(@RequestParam(value ="o", required = false)Long orderId, ModelAndView model) {
         
         if(orderId == null ){
@@ -54,7 +54,7 @@ public class EditOrderController {
            
            if(orderList.isEmpty()){
                model.setViewName("message");
-               model.addObject("message", "You have no orders");
+               model.addObject("message", "no_orders");
                
                return model;
            }
@@ -71,7 +71,8 @@ public class EditOrderController {
             Map<Long,String> carMap = new LinkedHashMap();
             if(order.getDriver() == null){
                 for(User u: drivers){
-                    carMap.put(u.getUserId(), u.getCar().getCarModel());
+                    carMap.put(u.getUserId(), u.getCar().getBrend().getBrendName() 
+                            + " " + u.getCar().getCarModel());
                     System.out.println("u " + u.getUserId() + " " + u.getCar().getCarModel());
                 }
             }
@@ -79,14 +80,14 @@ public class EditOrderController {
         }    
         
         EditOrderForm editOrderForm = new EditOrderForm(order);
-        model.setViewName("editOrder");
+        model.setViewName("editorder");
         model.addObject("editOrderForm", editOrderForm);
         
          
         return model;
     }
     
-    @RequestMapping(value = "/editOrder",method = RequestMethod.POST)
+    @RequestMapping(value = "/editorder",method = RequestMethod.POST)
     public ModelAndView editComplite(@Valid final EditOrderForm editOrderForm, final BindingResult result, ModelAndView model) {
 	if (result.hasErrors() ){
             return model;
@@ -97,7 +98,7 @@ public class EditOrderController {
                 orderService.setStatus(order, OrderStatus.CANCELED);
                 
                 model.setViewName("message");
-                model.addObject("message", "Order #" + order.getOrderId() + " sent to archive");
+                model.addObject("message", "archived");
                 return model;
                 
             }
@@ -107,15 +108,15 @@ public class EditOrderController {
                     orderService.setStatus(order, OrderStatus.CANCELED);
                     
                 model.setViewName("message");
-                model.addObject("message", "Order #" + editOrderForm.getOrderId() + " canceled");
+                model.addObject("message", "canceled");
                 return model;
             }
-            if(editOrderForm.getDriverId() != 0 ){
+            if(editOrderForm.getDriverId() !=null && editOrderForm.getDriverId() != 0 ){
                 orderService.setDriver(order,editOrderForm.getDriverId());
             }
             
             model.setViewName("message");
-            model.addObject("message", "Changed successfully");
+            model.addObject("message", "сhanged");
         
             return model;  
 	}

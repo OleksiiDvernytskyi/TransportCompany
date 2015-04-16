@@ -30,28 +30,33 @@ public class ShowActiveOrdersController {
     @Autowired
     private OrderService orderService;
     
-    @ModelAttribute("orderSearchForm")
-    public OrderSearchForm constructForm() {
-    return new OrderSearchForm();
-    }
-    
+//    @ModelAttribute("orderSearchForm")
+//    public OrderSearchForm constructForm() {
+//    return new OrderSearchForm();
+//    }
+    OrderSearchForm orderSearchForm = new OrderSearchForm();
     @RequestMapping(value = "showactiveorders", method = RequestMethod.GET)        
-    public ModelAndView showActiveOrders(@RequestParam (value ="p", required = false) Integer pageNumber, ModelAndView model) {
+    public ModelAndView showActiveOrders(@RequestParam (value ="p", required = false) Integer pageNumber, 
+            @RequestParam (value ="ph", required = false) String phone, ModelAndView model) {
         
-        if(pageNumber ==null ){
-            pageNumber = 0;
+        if(pageNumber ==null || pageNumber< 1 ){
+            pageNumber = 1;
         }
-        if(pageNumber< 0){
-            pageNumber =0;
-        }
+      
+        if(phone == null || phone.length()<3)
+            phone="";
         
-        List<Order> orderList = orderService.getActiveOrders(pageNumber);
+        orderSearchForm.setPhone(phone);
+        List<Order> orderList = orderService.getActiveOrders(pageNumber, phone);
        
-        if( pageNumber !=0 && orderList.isEmpty()){
-            orderList = orderService.getActiveOrders(--pageNumber);
+        Long pagesCount = orderService.getActivePagesCount(phone)+1;
+        
+        if( pageNumber >1 && orderList.isEmpty()){
+            orderList = orderService.getActiveOrders(--pageNumber, phone);
         }
-        
-        
+        model.addObject("pagesCount", pagesCount);
+        model.addObject("phone",phone );
+        model.addObject("orderSearchForm", orderSearchForm);
         model.addObject("pageNumber", pageNumber);
         model.addObject("orderList", orderList);
         model.setViewName("showactiveorders");
@@ -60,14 +65,24 @@ public class ShowActiveOrdersController {
     
     
     @RequestMapping(value = "showactiveorders", method = RequestMethod.POST)        
-    public ModelAndView searchUser(@Valid final OrderSearchForm orderSearchForm, final BindingResult result, ModelAndView model) {
+    public ModelAndView searchUser(@RequestParam (value ="p", required = false) Integer pageNumber,
+            @Valid final OrderSearchForm orderSearchForm, final BindingResult result, ModelAndView model) {
         
         if(orderSearchForm.getPhone().length() < 3){
-            showActiveOrders(0, model);
+            showActiveOrders(1, "", model);
             return model;
         }
         
-        List<Order> orderList = orderService.findByPhone(orderSearchForm.getPhone());
+        if(pageNumber ==null || pageNumber< 1 ){
+            pageNumber = 1;
+        }
+        
+        List<Order> orderList = orderService.getActiveOrders(pageNumber, orderSearchForm.getPhone());
+        if( pageNumber >1 && orderList.isEmpty()){
+            orderList = orderService.getActiveOrders(--pageNumber, orderSearchForm.getPhone());
+        }
+        Long pagesCount = orderService.getActivePagesCount(orderSearchForm.getPhone())+1;
+        
         for(Order o: orderList){
             if(o.getDriver() == null){
                 o.setDriver(new User());
@@ -75,7 +90,10 @@ public class ShowActiveOrdersController {
             }
         }
         
-        
+        if(orderSearchForm.getPhone() !=null && orderSearchForm.getPhone().length() >= 3)
+            model.addObject("phone",orderSearchForm.getPhone() );
+        model.addObject("pageNumber", pageNumber);
+        model.addObject("pagesCount", pagesCount);
         model.addObject("orderList", orderList);
         model.setViewName("showactiveorders");
         return model;

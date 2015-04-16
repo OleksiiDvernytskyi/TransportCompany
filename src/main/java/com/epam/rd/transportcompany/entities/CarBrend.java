@@ -10,30 +10,48 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author amd
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "CarBrend.findByName", 
+            query ="SELECT b FROM CarBrend b WHERE b.brendName = :name " ),
+    @NamedQuery(name = "CarBrend.readAll", 
+            query = "SELECT b FROM CarBrend b ORDER BY b.brendName")
+})
 public class CarBrend implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long brendId;
 
-    public Long getId() {
-        return id;
+    private String brendName;
+
+    public Long getBrendId() {
+        return brendId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBrendId(Long brendId) {
+        this.brendId = brendId;
     }
 
+    public String getBrendName() {
+        return brendName;
+    }
+
+    public void setBrendName(String brendName) {
+        this.brendName = brendName;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (brendId != null ? brendId.hashCode() : 0);
         return hash;
     }
 
@@ -44,7 +62,7 @@ public class CarBrend implements Serializable {
             return false;
         }
         CarBrend other = (CarBrend) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.brendId == null && other.brendId != null) || (this.brendId != null && !this.brendId.equals(other.brendId))) {
             return false;
         }
         return true;
@@ -52,7 +70,7 @@ public class CarBrend implements Serializable {
 
     @Override
     public String toString() {
-        return "com.epam.rd.transportcompany.entities.CarBrend[ id=" + id + " ]";
+        return "com.epam.rd.transportcompany.entities.CarBrend[ id=" + brendId + " ]";
     }
     
 }

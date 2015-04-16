@@ -61,7 +61,7 @@ public class IndexPageCotroller {
     
     @RequestMapping(value = "/signin-failure", method = RequestMethod.GET)
 	public ModelAndView signinFailure(ModelAndView model) {
-		model.addObject("message", "Incorrect login or password");
+		model.addObject("message", "incorrect");
                 model.setViewName("error");
                 return model;
 	}

@@ -6,11 +6,14 @@
 package com.epam.rd.transportcompany.controllers;
 
 import com.epam.rd.transportcompany.entities.Order;
+import com.epam.rd.transportcompany.entities.User;
 import com.epam.rd.transportcompany.forms.OrderSearchForm;
 import com.epam.rd.transportcompany.services.OrderService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,31 +30,83 @@ public class ShowArchiveOrdersController {
     @Autowired
     private OrderService orderService;
     
-    @ModelAttribute("orderSearchForm")
-    public OrderSearchForm constructForm() {
-    return new OrderSearchForm();
-    }
+//    @ModelAttribute("orderSearchForm")
+//    public OrderSearchForm constructForm() {
+//    return new OrderSearchForm();
+//    }
+    OrderSearchForm orderSearchForm = new OrderSearchForm();
     
     @RequestMapping(value = "showarchiveorders", method = RequestMethod.GET )        
-    public ModelAndView showArchiveOrders(@RequestParam (value = "p", required = false) Integer pageNumber, ModelAndView model) {
+    public ModelAndView showArchiveOrders(@RequestParam (value = "p", required = false) Integer pageNumber,
+            @RequestParam (value ="ph", required = false) String phone, ModelAndView model) {
       
-    if(pageNumber ==null ){
-        pageNumber = 0;
+    if(pageNumber ==null || pageNumber< 1 ){
+        pageNumber = 1;
     }
-    if(pageNumber< 0){
-        pageNumber =0;
-    }
+    
+    if(phone == null || phone.length()<3)
+            phone="";
         
-    List<Order> orderList = orderService.getArchiveOrders(pageNumber);
+    orderSearchForm.setPhone(phone);
+    
+    Long pagesCount = orderService.getArchivePagesCount(phone)+1;
+    while(pageNumber > pagesCount-1 )
+        pageNumber--;
+    
+    List<Order> orderList = orderService.getArchiveOrders(pageNumber, phone);
+    
+    
        
-    if( pageNumber !=0 && orderList.isEmpty()){
-        orderList = orderService.getArchiveOrders(--pageNumber);
-    }
+//    if( pageNumber >1 && orderList.isEmpty()){
+//        orderList = orderService.getArchiveOrders(--pageNumber, phone);
+//    }
         
-        
+    model.addObject("phone",phone );
+    model.addObject("pagesCount", pagesCount);
+    model.addObject("orderSearchForm", orderSearchForm);
     model.addObject("pageNumber", pageNumber);
     model.addObject("orderList", orderList);
     model.setViewName("showarchiveorders");
     return model;
+    }
+    
+    @RequestMapping(value = "showarchiveorders", method = RequestMethod.POST)        
+    public ModelAndView searchUser(@RequestParam (value ="p", required = false) Integer pageNumber,
+            @Valid final OrderSearchForm orderSearchForm, final BindingResult result, ModelAndView model) {
+        
+        if(orderSearchForm.getPhone().length() < 3){
+            showArchiveOrders(1, "", model);
+            return model;
+        }
+        if(pageNumber ==null || pageNumber< 1){
+            pageNumber = 1;
+        }
+        
+        Long pagesCount = orderService.getArchivePagesCount(orderSearchForm.getPhone())+1;
+        while(pageNumber > pagesCount-1 )
+            pageNumber--;
+        
+        List<Order> orderList = orderService.getArchiveOrders( pageNumber ,orderSearchForm.getPhone());
+//        if( pageNumber >1 && orderList.isEmpty()){
+//            orderList = orderService.getArchiveOrders(--pageNumber, orderSearchForm.getPhone());
+//        }
+//        Integer pagesCount = orderService.getArchivePagesCount(orderSearchForm.getPhone())+1;
+        
+        for(Order o: orderList){
+            if(o.getDriver() == null){
+                o.setDriver(new User());
+                
+            }
+        }
+        
+        if(orderSearchForm.getPhone() !=null && orderSearchForm.getPhone().length() >= 3)
+            model.addObject("phone",orderSearchForm.getPhone() );
+        
+        model.addObject("pageNumber", pageNumber);
+        model.addObject("pagesCount", pagesCount);
+        model.addObject("orderSearchForm", orderSearchForm);
+        model.addObject("orderList", orderList);
+        model.setViewName("showarchiveorders");
+        return model;
     }
 }

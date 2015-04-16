@@ -4,6 +4,7 @@
     Author     : amd
 --%>
 
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@page import="org.springframework.web.servlet.ModelAndView"%>
 <%@page import="com.epam.rd.transportcompany.entities.User"%>
@@ -16,20 +17,17 @@
  
     <div class="item">
         
-	<h1>Car added !</h1>
+	<h1><spring:message code="car_added"/></h1>
         <table border="2" cellspacing="1" width ="98%">
-<!--            <tr>
-                <td>id </td><td> ${newCar.carId}</td>
-            </tr>-->
-           
+
             <tr>
-                <td><h3>Car Model</h3> </td><td><h4> ${newCar.carModel}</h4></td>
+                <td><h3><spring:message code="car_model"/></h3> </td><td><h4> ${newCar.carModel}</h4></td>
             </tr>
              <tr>
-                <td><h3>Number of passengers</h3> </td><td><h4> ${newCar.passengers}</h4> </td>
+                <td><h3><spring:message code="passengers"/></h3> </td><td><h4> ${newCar.passengers}</h4> </td>
             </tr>
              <tr>
-                 <td><h3>CarCategory capacity</h3>  </td><td> <h4>${newCar.carCategory}</h4> </td>
+                 <td><h3><spring:message code="car_cat"/></h3>  </td><td> <h4>${newCar.carCategory}</h4> </td>
             </tr>
 
             

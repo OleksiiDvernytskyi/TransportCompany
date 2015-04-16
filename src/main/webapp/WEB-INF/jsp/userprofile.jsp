@@ -4,6 +4,7 @@
     Author     : amd
 --%>
 
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -19,41 +20,41 @@
            
             <form:form commandName="editProfileForm" method="post">
 
-                    <h1>USER  ${editProfileForm.username}</h1>
+                    <h1><spring:message code="user"/>  ${editProfileForm.username}</h1>
     
                     <table>
 
                          <tr>
-                             <td><h5>  Username: </h5></td><td>${editProfileForm.username} 
+                             <td><h5>  <spring:message code="username"/>: </h5></td><td>${editProfileForm.username} 
                                                         <form:hidden path="username" /></td>
                                 <td></td>
                         </tr>
                         <sec:authorize ifAllGranted="ROLE_DRIVER">    
                         <tr>
-                            <td><h5> Ready for new orders : </h5></td><td><form:checkbox path="ready"/> </td>
+                            <td><h5> <spring:message code="ready"/> : </h5></td><td><form:checkbox path="ready"/> </td>
 
                         </tr>
                         </sec:authorize>
                         <tr><td><span class="error"><form:errors path="phone" /></span></td></tr>
                         <tr>
-                            <td><h5> Phone: </h5></td><td><form:input path="phone"/></td>
+                            <td><h5> <spring:message code="pnumber"/>: </h5></td><td><form:input path="phone"/></td>
 
                         </tr>
 
                         <tr><td><span class="error"><form:errors path="password" /></span></td></tr>
                         <tr>
-                            <td><h5>  Password: </h5></td><td><form:password path="password"/></td>
+                            <td><h5>  <spring:message code="password"/>: </h5></td><td><form:password path="password"/></td>
 
                         </tr>
 
                         <tr><td><span class="error"><form:errors path="confirmPassword" /></span></td></tr>
                         <tr>
-                            <td><h5>Confirm Password: </h5></td><td><form:password path="confirmPassword" /></td>
+                            <td><h5><spring:message code="conf_pass"/>: </h5></td><td><form:password path="confirmPassword" /></td>
 
                         </tr>
                         <sec:authorize ifAllGranted="ROLE_DRIVER">
                         <tr>
-                            <td><h5>Car: </h5></td><td><form:select path="carId" >
+                            <td><h5><spring:message code="car"/>: </h5></td><td><form:select path="carId" >
                                                           <form:option value="0" label="${userCar}" />
                                                           <form:options items="${carMap}" />
                                                        </form:select>
@@ -63,7 +64,7 @@
                         </sec:authorize>
                     </table>
     
-                <center><input type="submit" value="Submit" /> </center>   
+                <center><input type="submit" value="<spring:message code="submit"/>" /> </center>   
 
             </form:form>
             

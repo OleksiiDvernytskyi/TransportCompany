@@ -3,6 +3,8 @@
     Created on : 12.04.2015, 15:32:42
     Author     : amd
 --%>
+
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -14,7 +16,7 @@
     <%@include file="/WEB-INF/layout/message.jsp" %> 
 	<div class="item">
 
-            <h1>Welcome ${username}</h1>
+            <h1><spring:message code="welcome"/> ${username}</h1>
  
         </div>
 

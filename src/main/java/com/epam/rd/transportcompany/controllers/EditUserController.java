@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class EditUserController {
-    
+ 
     @Autowired
     private UserService userService;
     
@@ -54,6 +54,9 @@ public class EditUserController {
         User user = userService.findByName(editUserForm.getUsername());
         
         user.setDisabled(editUserForm.isDisabled());
+        if(user.isDisabled()){
+            user.setCar(null);
+        }
         
         user.setUsername(editUserForm.getUsername());
         
@@ -68,8 +71,8 @@ public class EditUserController {
 
         userService.saveUser(user);
         
-        model.setViewName("useradded");
-        model.addObject("newUser", user);
+        model.setViewName("message");
+        model.addObject("message", "saved");
         return model;
     }
      

@@ -17,6 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,6 +30,16 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Entity
 @Table(name ="users")
+@NamedQueries({
+    @NamedQuery(name = "User.readAll",
+            query = "SELECT u FROM User u ORDER BY u.username"),
+    @NamedQuery(name = "User.findByUsername",
+            query = "SELECT u FROM User u WHERE u.username = :username "),
+    @NamedQuery(name = "User.getActiveDrivers", 
+            query = "SELECT u FROM User u WHERE u.userRole = 'DRIVER' "
+                + "AND u.ready = TRUE AND u.car != NULL AND u.car.carCategory >= :carCategory "
+                + "AND u.car.passengers >= :passengers ")
+})
 public class User implements Serializable, UserDetails {
     private static final long serialVersionUID = 1L;
     @Id

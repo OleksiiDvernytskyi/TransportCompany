@@ -58,7 +58,7 @@ public class UserProfileController {
         
         Map<Long,String> carMap = new LinkedHashMap();
         for(Car car: carList){
-            carMap.put(car.getCarId(), car.getCarModel());
+            carMap.put(car.getCarId(), car.getBrend().getBrendName()+ " " + car.getCarModel());
         }
         
         model.addObject("carMap",carMap);
@@ -98,7 +98,7 @@ public class UserProfileController {
         userService.saveUser(user);
         
         model.setViewName("message");
-        model.addObject("message", "Changed successfully");
+        model.addObject("message", "changed");
         return model;
     }
 }

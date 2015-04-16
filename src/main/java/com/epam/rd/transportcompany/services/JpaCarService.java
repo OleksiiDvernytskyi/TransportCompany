@@ -30,7 +30,11 @@ public class JpaCarService implements CarService{
 
     @Override
     public List<Car> readAll() {
-        return carRepository.readAll();
+        List<Car> carList = carRepository.readAll();
+        for(Car c: carList){
+            c.getBrend().getBrendId();
+        }
+        return carList;
     }
 
     @Transactional

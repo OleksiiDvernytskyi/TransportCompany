@@ -11,15 +11,16 @@
 	<http auto-config="true">
 		
                 <intercept-url pattern="/addorder.*" access="ROLE_DISPATCHER"/>
-                <intercept-url pattern="/showA*.*" access="ROLE_DISPATCHER" />
-                <intercept-url pattern="/editOrder.*" access="ROLE_DISPATCHER, ROLE_DRIVER" />
+                <intercept-url pattern="/showa*.*" access="ROLE_DISPATCHER" />
+                <intercept-url pattern="/editorder.*" access="ROLE_DISPATCHER, ROLE_DRIVER" />
+                <intercept-url pattern="/vieworder.*" access="ROLE_DISPATCHER" />
                 
                 <intercept-url pattern="/driver/**" access="ROLE_DRIVER"/>
-                <intercept-url pattern="/addcar.*" access="ROLE_DRIVER"/>
                 
+                <intercept-url pattern="/addcar*.*" access="ROLE_ADMIN"/>
                 <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
                 <intercept-url pattern="/adduser.*" access="ROLE_ADMIN" />
-                <intercept-url pattern="/showuser.*" access="ROLE_ADMIN" />
+                <intercept-url pattern="/showusers.*" access="ROLE_ADMIN" />
                 <intercept-url pattern="/edituser.*" access="ROLE_ADMIN" />  
                 
                 

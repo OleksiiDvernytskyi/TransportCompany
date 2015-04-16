@@ -35,8 +35,9 @@
 		
 			<div class="title">
 				<h1>MyTransportCompany</h1>
+                                
 			</div>
-
+                        
 		</div>
 		
 		<div class="content">

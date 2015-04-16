@@ -15,37 +15,37 @@
  
     <div class="item">
                             
-	<h1>Order </h1>
+	<h1><spring:message code="order"/> </h1>
            
         <table border="2" cellspacing="1" width ="98%">
            
             <tr>
-                <td><h3>Date and time </h3> </td><td><h4> ${order.date}</h4> </td>
+                <td><h3><spring:message code="date_and_time"/> </h3> </td><td><h4> ${order.date}</h4> </td>
             </tr>
             <tr>
-                <td><h3>Phone number </h3> </td><td><h4> ${order.phone}</h4></td>
+                <td><h3><spring:message code="pnumber"/> </h3> </td><td><h4> ${order.phone}</h4></td>
             </tr>
             <tr>
-                <td><h3>From where </h3> </td><td><h4> ${order.fromWhere}</h4> </td>
+                <td><h3><spring:message code="from"/> </h3> </td><td><h4> ${order.fromWhere}</h4> </td>
             </tr>
              <tr>
-                 <td><h3>To where</h3>  </td><td> <h4>${order.toWhere}</h4> </td>
+                 <td><h3><spring:message code="to"/></h3>  </td><td> <h4>${order.toWhere}</h4> </td>
             </tr>
              <tr>
-                 <td><h3>Passengers </h3> </td><td> <h4>${order.passengers}</h4> </td>
+                 <td><h3><spring:message code="passengers"/> </h3> </td><td> <h4>${order.passengers}</h4> </td>
             </tr>
             <tr>
-                 <td><h3>CarCategory </h3> </td><td> <h4>${order.carCategory}</h4> </td>
+                 <td><h3><spring:message code="car_cat"/> </h3> </td><td> <h4>${order.carCategory}</h4> </td>
             </tr>
             <c:if test="${order.driver != null}">
             <tr>
-                 <td><h3>Driver firstname</h3> </td><td> <h4>${order.driver.firstName}</h4> </td>
+                 <td><h3><spring:message code="d_fname"/></h3> </td><td> <h4>${order.driver.firstName}</h4> </td>
             </tr>
             <tr>
-                 <td><h3>Driver lastname </h3> </td><td> <h4>${order.driver.lastName}</h4> </td>
+                 <td><h3><spring:message code="d_lname"/> </h3> </td><td> <h4>${order.driver.lastName}</h4> </td>
             </tr>
             <tr>
-                 <td><h3>Driver phone </h3> </td><td> <h4>${order.driver.phone}</h4> </td>
+                 <td><h3><spring:message code="d_phone"/></h3> </td><td> <h4>${order.driver.phone}</h4> </td>
             </tr>
             </c:if>
             

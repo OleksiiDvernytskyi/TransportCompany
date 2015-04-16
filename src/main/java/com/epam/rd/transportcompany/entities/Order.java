@@ -17,7 +17,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -26,6 +29,22 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name ="orders")
+@NamedQueries({
+    @NamedQuery(name = "Order.getActiveOrders", 
+            query = "SELECT o FROM Order o WHERE o.phone LIKE :phone AND (o.status ='ACTIVE' OR o.status ='NEW') ORDER BY o.date DESC "),
+//    @NamedQuery(name = "Order.getActiveOrdersByPhone", 
+//            query = "SELECT o FROM Order o WHERE o.phone LIKE :phone AND ( o.status ='ACTIVE' OR o.status ='NEW') ORDER BY o.date DESC " ),
+    @NamedQuery(name = "Order.getArchiveOrders",
+            query = "SELECT o FROM Order o WHERE o.phone LIKE :phone AND ( o.status ='COMPLITE' OR o.status ='CANCELED') ORDER BY o.date DESC "),
+    @NamedQuery(name = "Order.getActiveOrdersByUserId",
+            query = "SELECT o FROM Order o WHERE (o.status ='ACTIVE' OR o.status ='NEW') AND o.driver.userId = :userId "),
+//    @NamedQuery(name = "Order.getArchiveOrdersByPhone",
+//            query = "SELECT o FROM Order o WHERE o.phone LIKE :phone AND ( o.status ='COMPLITE' OR o.status ='CANCELED') ORDER BY o.date DESC "),
+    @NamedQuery(name = "Order.getActivePagesCount", 
+            query = "SELECT COUNT(o) FROM Order o WHERE o.phone LIKE :phone AND (o.status ='ACTIVE' OR o.status ='NEW') ORDER BY o.date DESC "),
+    @NamedQuery(name = "Order.getArchivePagesCount", 
+            query = "SELECT COUNT(o) FROM Order o WHERE o.phone LIKE :phone AND ( o.status ='COMPLITE' OR o.status ='CANCELED') ORDER BY o.date DESC ")
+})
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,7 +60,8 @@ public class Order implements Serializable {
     private Long passengers;
     private Long carCategory;
     private LocalDateTime date;
-    
+    @Transient
+    String dateAndTime;
     
     @ManyToOne
     @JoinColumn(name =  "userId")
@@ -54,6 +74,16 @@ public class Order implements Serializable {
         
     }
 
+    public String getDateAndTime() {
+        if(dateAndTime == null){
+            dateAndTime = date.format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm"));
+        }
+        return dateAndTime;
+    }
+
+    public void setDateAndTime(String dateAndTime) {
+        this.dateAndTime = dateAndTime;
+    }
     
     public String getFromWhere() {
         return fromWhere;

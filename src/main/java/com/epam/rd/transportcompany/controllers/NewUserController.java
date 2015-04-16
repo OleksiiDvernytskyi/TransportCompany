@@ -71,7 +71,7 @@ public class NewUserController {
             model.addObject("newUser", newUser);
         }else{
             model.setViewName("error");
-            model.addObject("message", "User not added, something goes wrong");
+            model.addObject("message", "user_not");
         }
         return model;
     }

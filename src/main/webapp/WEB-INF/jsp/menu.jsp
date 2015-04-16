@@ -4,6 +4,7 @@
     Author     : a
 --%>
 
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags" %>
@@ -16,39 +17,37 @@
                     
                     <sec:authorize ifAllGranted="ROLE_ADMIN">
 
-                        <h1>Administrator, <sec:authentication property="principal.username"/> </h1>
+                        <h1><spring:message code="admin"/>, <sec:authentication property="principal.username"/> </h1>
                        
 			<ul>
                                 
-				<li><a href="adduser.html">Add user</a></li>
-				<li><a href="showusers.html">Show all users</a></li>
-                                <li><a href="userprofile.html">Profile</a></li>
-				<!--<li><a href="index.html">Edit user</a></li>-->
-				<!--<li><a href="index.html">convallis</a></li>-->
-                                <li><a href="j_spring_security_logout">Loguot</a></li>
+				<li><a href="adduser.html"><spring:message code="add_u"/></a></li>
+				<li><a href="showusers.html"><spring:message code="show_all_u"/></a></li>
+				<li><a href="addcarbrend.html"><spring:message code="new_brend"/></a></li>
+                                <li><a href="addcar.html"><spring:message code="new_car"/></a></li>
+                                <li><a href="userprofile.html"><spring:message code="profile"/></a></li>
+                                <li><a href="j_spring_security_logout"><spring:message code="logout"/></a></li>
 			</ul>
                     </sec:authorize>        
 
                     <sec:authorize ifAllGranted="ROLE_DISPATCHER">        
-			<h1>Dispatcher, <sec:authentication property="principal.username"/></h1>
+			<h1><spring:message code="disp"/>, <sec:authentication property="principal.username"/></h1>
 			<ul>
                                 
-				<li><a href="addorder.html">New order</a></li>
-				<li><a href="showactiveorders.html">Active orders</a></li>
-				<li><a href="showarchiveorders.html">Archive orders</a></li>
-				<li><a href="userprofile.html">Profile</a></li>
-                                <!--<li><a href="index.html">sociis natoque</a></li>-->
-                                <li><a href="j_spring_security_logout">Loguot</a></li>
+				<li><a href="addorder.html"><spring:message code="new_order"/></a></li>
+				<li><a href="showactiveorders.html"><spring:message code="active_o"/></a></li>
+				<li><a href="showarchiveorders.html"><spring:message code="archive"/></a></li>
+				<li><a href="userprofile.html"><spring:message code="profile"/></a></li>
+                                <li><a href="j_spring_security_logout"><spring:message code="logout"/></a></li>
 			</ul>
                     </sec:authorize>      
                     <sec:authorize ifAllGranted="ROLE_DRIVER">
-			<h1>Driver, <sec:authentication property="principal.username"/> </h1>
+			<h1><spring:message code="driver"/>, <sec:authentication property="principal.username"/> </h1>
 			<ul>
 				
-				<li><a href="userprofile.html">Profile</a></li>
-                                <li><a href="editOrder.html">Orders</a></li>
-                                <li><a href="addcar.html">Add car</a></li>
-                                <li><a href="j_spring_security_logout">Loguot</a></li>
+				<li><a href="userprofile.html"><spring:message code="profile"/></a></li>
+                                <li><a href="editorder.html"><spring:message code="orders"/></a></li>
+                                <li><a href="j_spring_security_logout"><spring:message code="logout"/></a></li>
 				
 				
 			</ul>
