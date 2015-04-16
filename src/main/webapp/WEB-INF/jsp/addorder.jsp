@@ -24,7 +24,7 @@
 </style>
     </head>
     <body>
-        <form:form commandName="newOrder" method="post">
+        <form:form commandName="newOrderForm" method="post">
 
 <center><h1>New order</h1></center>
 
@@ -53,9 +53,9 @@
             
     </tr>
     
-    <tr><td><span class="error"><form:errors path="cargo" /></span></td></tr>
+    <tr><td><span class="error"><form:errors path="carCategory" /></span></td></tr>
     <tr>
-        <td><h5>  Cargo: </h5></td><td><form:input path="cargo"/></td>
+        <td><h5>  CarCategory: </h5></td><td><form:input path="carCategory"/></td>
             
     </tr>
 </table>

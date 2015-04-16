@@ -32,7 +32,7 @@ public class NewOrderForm {
     @DecimalMax(value = "100" )
     private Long passengers;
     @DecimalMax(value = "1000" )
-    private Long cargo;
+    private Long carCategory;
 
     public String getPhone() {
         return phone;
@@ -66,12 +66,12 @@ public class NewOrderForm {
         this.passengers = passengers;
     }
 
-    public Long getCargo() {
-        return cargo;
+    public Long getCarCategory() {
+        return carCategory;
     }
 
-    public void setCargo(Long cargo) {
-        this.cargo = cargo;
+    public void setCarCategory(Long carCategory) {
+        this.carCategory = carCategory;
     }
     
     

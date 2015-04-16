@@ -56,7 +56,7 @@ public class NewOrderController {
         order.setFromWhere(newOrderForm.getFromWhere());
         order.setToWhere(newOrderForm.getToWhere());
         order.setPassengers(newOrderForm.getPassengers());
-        order.setCargo(newOrderForm.getCargo());
+        order.setCarCategory(newOrderForm.getCarCategory());
         
         orderService.saveOrder(order);
         

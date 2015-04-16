@@ -4,26 +4,35 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                     http://www.springframework.org/schema/security 
-                    http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+                    http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http pattern="/css/**" security="none" />
 	
 	<http auto-config="true">
-		<intercept-url pattern="/addorder.*" access="hasRole('DRIVER')" />
-		<!--<intercept-url pattern="/adduser.*" access="hasRole('ADMIN')" />-->
+		
+                <intercept-url pattern="/addorder.*" access="ROLE_DISPATCHER"/>
+                <intercept-url pattern="/showA*.*" access="ROLE_DISPATCHER" />
+                <intercept-url pattern="/editOrder.*" access="ROLE_DISPATCHER, ROLE_DRIVER" />
+                
+                <intercept-url pattern="/driver/**" access="ROLE_DRIVER"/>
+                <intercept-url pattern="/addcar.*" access="ROLE_DRIVER"/>
+                
+                <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+                <intercept-url pattern="/adduser.*" access="ROLE_ADMIN" />
+                <intercept-url pattern="/showuser.*" access="ROLE_ADMIN" />
+                <intercept-url pattern="/edituser.*" access="ROLE_ADMIN" />  
+                
+                
                 
                 <form-login login-page="/index.html"
-			authentication-failure-url="/signin-failure" default-target-url="/" />
+			authentication-failure-url="/signin-failure.html" default-target-url="/" />
 	</http>	
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="userService">
-                    <password-encoder hash="sha-256"/>
-<!--			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
-				<user name="user" password="user" authorities="ROLE_USER" />
-			</user-service>-->
-                    
+                    <password-encoder hash="sha">
+                        <salt-source user-property="username"/>
+                    </password-encoder>
 		</authentication-provider>
 	</authentication-manager>
         

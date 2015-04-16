@@ -32,7 +32,7 @@
                  <td><h3>Passengers </h3> </td><td> <h4>${newOrder.passengers}</h4> </td>
             </tr>
             <tr>
-                 <td><h3>Cargo </h3> </td><td> <h4>${newOrder.cargo}</h4> </td>
+                 <td><h3>CarCategory </h3> </td><td> <h4>${newOrder.carCategory}</h4> </td>
             </tr>
             
             

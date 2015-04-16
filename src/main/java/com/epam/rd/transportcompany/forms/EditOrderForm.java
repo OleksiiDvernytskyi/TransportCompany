@@ -20,7 +20,7 @@ public class EditOrderForm {
     private String fromWhere;
     private String toWhere;
     private Long passengers;
-    private Long cargo;
+    private Long carCategory;
     private boolean canceled = false;   
     private OrderStatus status;
     private boolean complite = false;
@@ -36,7 +36,7 @@ public class EditOrderForm {
         this.fromWhere = order.getFromWhere();
         this.toWhere = order.getToWhere();
         this.passengers = order.getPassengers();
-        this.cargo = order.getCargo();
+        this.carCategory = order.getCarCategory();
         this.status = order.getStatus();
         
     }
@@ -97,12 +97,12 @@ public class EditOrderForm {
         this.passengers = passengers;
     }
 
-    public Long getCargo() {
-        return cargo;
+    public Long getCarCategory() {
+        return carCategory;
     }
 
-    public void setCargo(Long cargo) {
-        this.cargo = cargo;
+    public void setCarCategory(Long carCategory) {
+        this.carCategory = carCategory;
     }
 
     public OrderStatus getStatus() {

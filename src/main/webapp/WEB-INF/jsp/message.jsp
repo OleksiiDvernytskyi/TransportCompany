@@ -1,8 +1,9 @@
 <%-- 
-    Document   : welcome
-    Created on : 12.04.2015, 15:32:42
+    Document   : message
+    Created on : 15.04.2015, 20:37:31
     Author     : amd
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -14,7 +15,7 @@
     <%@include file="/WEB-INF/layout/message.jsp" %> 
 	<div class="item">
 
-            <h1>Welcome ${username}</h1>
+            <h1> ${message}</h1>
  
         </div>
 

@@ -28,7 +28,7 @@ public class Car implements Serializable {
     private String carModel;
     
     private Long passengers;
-    private Long cargo;
+    private Long carCategory;
 
     public Long getCarId() {
         return carId;
@@ -54,12 +54,12 @@ public class Car implements Serializable {
         this.passengers = passengers;
     }
 
-    public Long getCargo() {
-        return cargo;
+    public Long getCarCategory() {
+        return carCategory;
     }
 
-    public void setCargo(Long cargo) {
-        this.cargo = cargo;
+    public void setCarCategory(Long carCategory) {
+        this.carCategory = carCategory;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "Car{" + "carId=" + carId + ", carModel=" + carModel + ", passengers=" + passengers + ", cargo=" + cargo + '}';
+        return "Car{" + "carId=" + carId + ", carModel=" + carModel + ", passengers=" + passengers + ", carCategory=" + carCategory + '}';
     }
     
     

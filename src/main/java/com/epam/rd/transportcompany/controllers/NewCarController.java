@@ -51,7 +51,7 @@ public class NewCarController {
         Car newCar = new Car();
         newCar.setCarModel(newCarForm.getCarModel());
         newCar.setPassengers(newCarForm.getPassengers());
-        newCar.setCargo(newCarForm.getCargo());
+        newCar.setCarCategory(newCarForm.getCarCategory());
         
         carService.saveCar(newCar);
         if(newCar.getCarId() != null){

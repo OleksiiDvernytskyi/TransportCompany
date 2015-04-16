@@ -1,9 +1,8 @@
 <%-- 
-    Document   : showactiveorders
-    Created on : 13.04.2015, 12:23:04
+    Document   : showarchiveorders
+    Created on : 15.04.2015, 10:02:20
     Author     : amd
 --%>
-
 
 <%@page import="com.epam.rd.transportcompany.entities.Order"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,12 +18,11 @@
  
     <div class="item">
         
-        <h1>Active Orders  <table align="right"> 
-            <tr><td><a href="showactiveorders.html?p=${pageNumber -1}">Prev</a></td>
+        <h1>Archive Orders  <table align="right"> 
+            <tr><td><a href="showarchiveorders.html?p=${pageNumber -1}">Prev</a></td>
                 <td>${pageNumber}</td>
-                <td><a href="showactiveorders.html?p=${pageNumber +1}">Next</a></td></tr>
+                <td><a href="showarchiveorders.html?p=${pageNumber +1}">Next</a></td></tr>
                         </table></h1>
-                        
             <form:form commandName="orderSearchForm" method="post">
                 <table>        
                     <td><h3>Find by phone : </h3> </td><td><form:input path="phone"/></td><td><input type="submit" value="Search" /></td>
@@ -38,7 +36,7 @@
             </tr>
        <c:forEach items = "${orderList}" var="order" >
             <tr>
-                <td><h4><a href="editOrder.html?o=${order.orderId}"> ${order.phone} </a></h4></td>
+                <td><h4><a href="viewOrder.html?o=${order.orderId}"> ${order.phone} </a></h4></td>
                     <td><h4> ${order.date} </h4></td>
                     <td><h4> ${order.fromWhere} </h4></td>
                         <td><h4> ${order.driver.username} </h4></td>

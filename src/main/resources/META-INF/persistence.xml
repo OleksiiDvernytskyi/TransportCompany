@@ -5,6 +5,7 @@
     <class>com.epam.rd.domain.Customer</class>
     <class>com.epam.rd.transportcompany.entities.Order</class>
     <class>com.epam.rd.transportcompany.entities.Car</class>
+    <class>com.epam.rd.transportcompany.entities.CarBrend</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/transport?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

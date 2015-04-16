@@ -29,7 +29,7 @@
                 <td><h3>Number of passengers</h3> </td><td><h4> ${newCar.passengers}</h4> </td>
             </tr>
              <tr>
-                 <td><h3>Cargo capacity</h3>  </td><td> <h4>${newCar.cargo}</h4> </td>
+                 <td><h3>CarCategory capacity</h3>  </td><td> <h4>${newCar.carCategory}</h4> </td>
             </tr>
 
             

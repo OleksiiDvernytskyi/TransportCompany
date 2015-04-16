@@ -24,7 +24,7 @@
 </style>
     </head>
     <body>
-        <form:form commandName="newCar" method="post" >
+        <form:form commandName="newCarForm" method="post" >
 
 <center><h1>New car</h1></center>
 
@@ -39,9 +39,9 @@
         <td><h5>  Passengers *: </h5></td><td><form:input path="passengers" /></td>
             
     </tr>
-    <tr><td><span class="error"><form:errors path="cargo" /></span></td></tr>
+    <tr><td><span class="error"><form:errors path="carCategory" /></span></td></tr>
     <tr>
-        <td><h5>  Cargo *: </h5></td><td><form:input path="cargo" /></td>
+        <td><h5>  CarCategory *: </h5></td><td><form:input path="carCategory" /></td>
             
     </tr>
 

@@ -28,12 +28,16 @@
         <table border="2" cellspacing="1" width = "98%" align="centre">
             
              <tr>
-                 <td><h3>  Username </h3></td><td><h3>  Firstname </h3></td><td><h3>  Lastname  </h3></td>
+                 <td><h3>  Username </h3></td>
+                        <td><h3>  Firstname </h3></td>
+                            <td><h3>  Lastname  </h3></td>
+                                <td><h3>  User role  </h3></td>
             </tr>
        <c:forEach items = "${userList}" var="user" >
             <tr>
                 <td><h4><a href="edituser.html?user=${user.username}"> ${user.username} </a></h4></td>
                     <td><h4> ${user.firstName} </h4></td><td><h4> ${user.lastName} </h4></td>
+                        <td><h4> ${user.userRole} </h4></td>
             </tr>
        </c:forEach>  
             

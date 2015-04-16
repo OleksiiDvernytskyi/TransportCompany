@@ -39,7 +39,7 @@ public class Order implements Serializable {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private Long passengers;
-    private Long cargo;
+    private Long carCategory;
     private LocalDateTime date;
     
     
@@ -95,12 +95,12 @@ public class Order implements Serializable {
         this.passengers = passengers;
     }
 
-    public Long getCargo() {
-        return cargo;
+    public Long getCarCategory() {
+        return carCategory;
     }
 
-    public void setCargo(Long cargo) {
-        this.cargo = cargo;
+    public void setCarCategory(Long carCategory) {
+        this.carCategory = carCategory;
     }
 
     public LocalDateTime getDate() {

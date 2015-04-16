@@ -21,7 +21,7 @@ public interface UserRepository {
 
     public List<User> readAll(Integer pageNumber);
 
-    public List<User> getActiveDrivers(Long passengers, Long cargo);
+    public List<User> getActiveDrivers(Long passengers, Long carCategory);
 
     public User findById(Long userId);
 }

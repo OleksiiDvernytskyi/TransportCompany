@@ -4,14 +4,15 @@
     Author     : amd
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-    <% 
-        String message = request.getParameter("message");
-    %>
-                    <% if(message != null){ %>
+<!--    
+                    <c:if test="${message != null}">
+                    
 			<div class="item">
-                            <% out.print(""+message); %>
+                            ${message}
 			</div>
-                    <% } %>
-			
+                 
+                    </c:if>
+			-->

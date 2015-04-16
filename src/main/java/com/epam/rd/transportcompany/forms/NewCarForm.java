@@ -18,11 +18,11 @@ public class NewCarForm {
     @Size(min=3, max=20)
     private String carModel;
     
-    @Range(min = 1, max = 120)
+    @Range(min = 1, max = 20)
     private Long passengers;
     
-    @Range(min = 0, max = 120)
-    private Long cargo;
+    @Range(min = 1, max = 10)
+    private Long carCategory;
 
     public String getCarModel() {
         return carModel;
@@ -40,12 +40,12 @@ public class NewCarForm {
         this.passengers = passengers;
     }
 
-    public Long getCargo() {
-        return cargo;
+    public Long getCarCategory() {
+        return carCategory;
     }
 
-    public void setCargo(Long cargo) {
-        this.cargo = cargo;
+    public void setCarCategory(Long carCategory) {
+        this.carCategory = carCategory;
     }
     
     

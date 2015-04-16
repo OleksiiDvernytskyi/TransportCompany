@@ -10,12 +10,17 @@
 	<div class="item">
                  
             <h1>Please sign in</h1>
-                                
-                <form:form commandName="loginForm" method="post">
-                    <form:input path="j_username" />
-                    <form:password path="j_password" />
-                    <form:button class="btn btn-lg btn-primary btn-block" type="submit">Войти</form:button>
-                </form:form>
+                
+            <form class="login-form" action="j_spring_security_check" method="post">
+		 	
+                        <input id="j_username" name="j_username" size="20" maxlength="20" type="text"  placeholder="Username"/>
+
+			<input id="j_password" name="j_password" size="20" maxlength="20" type="password" placeholder="Password" />
+			
+			<input type="submit" value="Login" />
+            </form>
+            
+            
                     
             
       	</div>

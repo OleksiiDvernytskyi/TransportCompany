@@ -71,18 +71,18 @@ public class JpaUserRepository implements UserRepository{
     }
 
     @Override
-    public List<User> getActiveDrivers(Long passengers, Long cargo) {
+    public List<User> getActiveDrivers(Long passengers, Long carCategory) {
         if(passengers == null ){
             passengers = 0L;
         }
-        if(cargo == null){
-            cargo = 0L;
+        if(carCategory == null){
+            carCategory = 0L;
         }
         
         Query query = em.createQuery("SELECT u FROM User u WHERE u.userRole = 'DRIVER' "
-                + "AND u.ready = TRUE AND u.car != NULL AND u.car.cargo >= :cargo "
+                + "AND u.ready = TRUE AND u.car != NULL AND u.car.carCategory >= :carCategory "
                 + "AND u.car.passengers >= :passengers  ");
-        query.setParameter("cargo", cargo);
+        query.setParameter("carCategory", carCategory);
         query.setParameter("passengers", passengers);
         query.setMaxResults(MAX_NUMBER_RESULTS);
         

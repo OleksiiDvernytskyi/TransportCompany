@@ -67,7 +67,7 @@ public class EditOrderController {
                 
                 return model;
             }
-            List<User> drivers = userService.getActiveDrivers(order.getPassengers(), order.getCargo());
+            List<User> drivers = userService.getActiveDrivers(order.getPassengers(), order.getCarCategory());
             Map<Long,String> carMap = new LinkedHashMap();
             if(order.getDriver() == null){
                 for(User u: drivers){

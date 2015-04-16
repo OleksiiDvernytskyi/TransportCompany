@@ -171,11 +171,11 @@
             Castor, XStream, and XML Beans.
             (depends on spring-core, spring-beans, spring-context)
             Define this if you need OXM (org.springframework.oxm.*)-->
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
             <version>4.1.5.RELEASE</version>
-        </dependency>
+        </dependency>-->
         <!-- Web application development utilities applicable to both Servlet and 
             Portlet Environments 
             (depends on spring-core, spring-beans, spring-context)
@@ -218,19 +218,25 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>4.0.0.RELEASE</version>
+            <version>3.2.0.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>4.0.0.RELEASE</version>
+            <version>3.2.0.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>4.0.0.RELEASE</version>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>3.2.0.RELEASE</version>
         </dependency>
 
 </dependencies>
