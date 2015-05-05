@@ -59,8 +59,8 @@ public class NewUserController {
         User newUser = new User();
 
         newUser.setUsername(newUserForm.getUsername());
-        newUser.setFirstName(newUserForm.getFirstname());
-        newUser.setLastName(newUserForm.getLastname());
+        newUser.setFirstname(newUserForm.getFirstname());
+        newUser.setLastname(newUserForm.getLastname());
         newUser.setPhone(newUserForm.getPhone());
         newUser.setUserRole(newUserForm.getRole());
        

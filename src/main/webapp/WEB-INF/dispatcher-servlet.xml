@@ -21,33 +21,21 @@
    
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
-    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="mappings">
-            <props>
-                <prop key="index.html">indexController</prop>
-            </props>
-        </property>
-    </bean>
-
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
     
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />
-    
     <mvc:resources location="/resources/**" mapping="/resources/**" /> 
     
     <context:component-scan base-package="com.epam.rd.transportcompany.controllers" />
     
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+<!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
     </bean>
-    
+    -->
     <bean id="messageSource"
              class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="/WEB-INF/label" />
+        <property name="basename" value="/resources/label" />
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
  
@@ -61,17 +49,11 @@
         <property name="defaultLocale" value="en"/>
     </bean>
 
-    <bean id="handlerMapping"
-        class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-        <property name="interceptors">
-            <ref bean="localeChangeInterceptor" />
-        </property>
-    </bean>
-
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang" />
         </bean>
     </mvc:interceptors>
+    
     <mvc:annotation-driven />       
 </beans>

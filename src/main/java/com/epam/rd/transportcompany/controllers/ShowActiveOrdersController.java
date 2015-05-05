@@ -14,7 +14,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,10 +29,6 @@ public class ShowActiveOrdersController {
     @Autowired
     private OrderService orderService;
     
-//    @ModelAttribute("orderSearchForm")
-//    public OrderSearchForm constructForm() {
-//    return new OrderSearchForm();
-//    }
     OrderSearchForm orderSearchForm = new OrderSearchForm();
     @RequestMapping(value = "showactiveorders", method = RequestMethod.GET)        
     public ModelAndView showActiveOrders(@RequestParam (value ="p", required = false) Integer pageNumber, 
@@ -47,13 +42,14 @@ public class ShowActiveOrdersController {
             phone="";
         
         orderSearchForm.setPhone(phone);
+        
         List<Order> orderList = orderService.getActiveOrders(pageNumber, phone);
        
         Long pagesCount = orderService.getActivePagesCount(phone)+1;
         
-        if( pageNumber >1 && orderList.isEmpty()){
-            orderList = orderService.getActiveOrders(--pageNumber, phone);
-        }
+        if(pageNumber > pagesCount )
+            pageNumber= pagesCount.intValue();
+         
         model.addObject("pagesCount", pagesCount);
         model.addObject("phone",phone );
         model.addObject("orderSearchForm", orderSearchForm);
@@ -77,11 +73,12 @@ public class ShowActiveOrdersController {
             pageNumber = 1;
         }
         
+        Long pagesCount = orderService.getActivePagesCount(orderSearchForm.getPhone())+1; 
+        
+        if(pageNumber > pagesCount )
+            pageNumber= pagesCount.intValue();
+         
         List<Order> orderList = orderService.getActiveOrders(pageNumber, orderSearchForm.getPhone());
-        if( pageNumber >1 && orderList.isEmpty()){
-            orderList = orderService.getActiveOrders(--pageNumber, orderSearchForm.getPhone());
-        }
-        Long pagesCount = orderService.getActivePagesCount(orderSearchForm.getPhone())+1;
         
         for(Order o: orderList){
             if(o.getDriver() == null){

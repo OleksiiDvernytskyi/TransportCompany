@@ -5,11 +5,7 @@
  */
 package com.epam.rd.transportcompany.forms;
 
-import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 

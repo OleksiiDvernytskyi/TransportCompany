@@ -15,7 +15,9 @@ import java.util.List;
 public interface UserService {
     
     public User getUserById(Long id);
+    
     public List<User> getAllUsers();
+    
     public Long saveUser(User user);
 
     public User findByName(String username);
@@ -23,5 +25,7 @@ public interface UserService {
     public List<User> getAllUsers(Integer pageNumber);
 
     public List<User> getActiveDrivers(Long passengers, Long carCategory);
+    
+    public Long getPagesCount();
 
 }

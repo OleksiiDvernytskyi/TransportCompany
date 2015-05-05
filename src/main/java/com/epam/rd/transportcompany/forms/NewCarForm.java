@@ -5,7 +5,6 @@
  */
 package com.epam.rd.transportcompany.forms;
 
-import com.epam.rd.transportcompany.entities.CarBrend;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 

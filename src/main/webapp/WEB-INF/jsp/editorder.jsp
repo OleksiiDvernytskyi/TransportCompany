@@ -56,11 +56,20 @@
     </tr>
     <sec:authorize ifAllGranted="ROLE_DISPATCHER">
     <tr>
-        <td><h5><spring:message code="car_select"/> </h5></td><td><form:select path="driverId" >
-                                                <form:option value="0" label="--- Select ---" />
-                                                <form:options items="${carMap}" />
-                                            </form:select>
-            </td>
+        <td><h5><spring:message code="car_select"/> </h5></td>
+        <td>
+            <form:select path="driverId" >
+                <c:if test="${order.driver != null}" >
+                    <form:option value="${editOrderForm.driverId}" label="${order.driver.car.brend.brendName} ${order.driver.car.carModel}"/>
+                </c:if>
+                <c:if test="${order.driver == null}" >
+                    <c:forEach items="${drivers}" var="driver">
+                        <form:option value="driver.userId" label="${driver.car.brend.brendName}  ${driver.car.carModel}" />
+                    </c:forEach>                            
+                </c:if>
+                
+            </form:select>
+        </td>
 
     </tr>
     

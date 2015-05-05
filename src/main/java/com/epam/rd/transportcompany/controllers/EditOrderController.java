@@ -12,9 +12,7 @@ import com.epam.rd.transportcompany.entities.UserRole;
 import com.epam.rd.transportcompany.forms.EditOrderForm;
 import com.epam.rd.transportcompany.services.OrderService;
 import com.epam.rd.transportcompany.services.UserService;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -68,18 +66,13 @@ public class EditOrderController {
                 return model;
             }
             List<User> drivers = userService.getActiveDrivers(order.getPassengers(), order.getCarCategory());
-            Map<Long,String> carMap = new LinkedHashMap();
-            if(order.getDriver() == null){
-                for(User u: drivers){
-                    carMap.put(u.getUserId(), u.getCar().getBrend().getBrendName() 
-                            + " " + u.getCar().getCarModel());
-                    System.out.println("u " + u.getUserId() + " " + u.getCar().getCarModel());
-                }
-            }
-            model.addObject("carMap",carMap);
+
+            model.addObject("order", order);
+            model.addObject("drivers", drivers);
         }    
         
         EditOrderForm editOrderForm = new EditOrderForm(order);
+        
         model.setViewName("editorder");
         model.addObject("editOrderForm", editOrderForm);
         
@@ -116,7 +109,7 @@ public class EditOrderController {
             }
             
             model.setViewName("message");
-            model.addObject("message", "сhanged");
+            model.addObject("message", "changed");
         
             return model;  
 	}

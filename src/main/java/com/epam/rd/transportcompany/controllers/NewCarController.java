@@ -10,9 +10,7 @@ import com.epam.rd.transportcompany.entities.CarBrend;
 import com.epam.rd.transportcompany.forms.NewCarForm;
 import com.epam.rd.transportcompany.services.CarBrendService;
 import com.epam.rd.transportcompany.services.CarService;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -43,14 +41,8 @@ public class NewCarController {
     public ModelAndView addCar(ModelAndView model) {
 
         List<CarBrend> brendList = carBrendService.readAll();
-        System.out.println("list" + brendList.size());
-        Map<Long,String> carBrends = new LinkedHashMap();
-        if(brendList != null ){
-            for(CarBrend cb: brendList){
-                carBrends.put(cb.getBrendId(), cb.getBrendName());
-            }
-        }
-        model.addObject("carBrends", carBrends);
+
+        model.addObject("brendList", brendList);
         return model;
     }
    

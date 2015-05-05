@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epam.rd.transportcompany.repositories;
+package com.epam.rd.transportcompany.jparepositories;
 
 import com.epam.rd.transportcompany.entities.Order;
+import com.epam.rd.transportcompany.repositories.OrderRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,14 +44,6 @@ public class JpaOrderRepository implements OrderRepository{
         
         return query.getResultList();
     }
-
-//    @Override
-//    public List<Order> findByPhone(String phone) {
-//        Query query = em.createNamedQuery("Order.getActiveOrdersByPhone");
-//        query.setParameter("phone", "%" + phone + "%");
-//        
-//        return query.getResultList();
-//    }
 
     @Override
     public Order findById(Long id) {

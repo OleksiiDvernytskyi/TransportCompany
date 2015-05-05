@@ -18,7 +18,9 @@
     <div class="item">
         
         <h1><spring:message code="users"/> <table align="right"> 
-            <tr><td><a href="showusers.html?p=${pageNumber -1}">Prev</a></td><td>${pageNumber}</td><td><a href="showusers.html?p=${pageNumber +1}">Next</a></td></tr>
+            <tr><td><a href="showusers.html?p=${pageNumber -1}">Prev</a></td>
+                <td>${pageNumber} of ${pagesCount}</td>
+                <td><a href="showusers.html?p=${pageNumber +1}">Next</a></td></tr>
                         </table></h1>
             <form:form commandName="userSearchForm" method="post">
                 <table>        
@@ -37,8 +39,8 @@
        <c:forEach items = "${userList}" var="user" >
             <tr>
                 <td><h4><a href="edituser.html?user=${user.username}"> ${user.username} </a></h4></td>
-                    <td><h4> ${user.firstName} </h4></td><td><h4> ${user.lastName} </h4></td>
-                        <td><h4> ${user.userRole} </h4></td>
+                    <td><h4> ${user.firstname} </h4></td><td><h4> ${user.lastname} </h4></td>
+                        <td><h4><spring:message code="${user.userRole}"/>  </h4></td>
             </tr>
        </c:forEach>  
             

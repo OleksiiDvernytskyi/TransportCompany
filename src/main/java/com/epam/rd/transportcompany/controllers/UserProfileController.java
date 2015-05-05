@@ -12,9 +12,7 @@ import com.epam.rd.transportcompany.forms.EditProfileForm;
 import com.epam.rd.transportcompany.services.CarService;
 import com.epam.rd.transportcompany.services.OrderService;
 import com.epam.rd.transportcompany.services.UserService;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -50,18 +48,10 @@ public class UserProfileController {
         
         User user = userService.findByName(username);
         EditProfileForm editProfileForm = new EditProfileForm(user);
-        if(user.getCar() != null) {
-            model.addObject("userCar", user.getCar().getCarModel());
-        }
         
         List<Car> carList = carService.readAll();
-        
-        Map<Long,String> carMap = new LinkedHashMap();
-        for(Car car: carList){
-            carMap.put(car.getCarId(), car.getBrend().getBrendName()+ " " + car.getCarModel());
-        }
-        
-        model.addObject("carMap",carMap);
+
+        model.addObject("carList",carList);
         
         model.setViewName("userprofile");
         model.addObject("editProfileForm", editProfileForm);

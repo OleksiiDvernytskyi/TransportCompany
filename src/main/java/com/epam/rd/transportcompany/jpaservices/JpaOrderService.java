@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epam.rd.transportcompany.services;
+package com.epam.rd.transportcompany.jpaservices;
 
 import com.epam.rd.transportcompany.entities.Order;
 import com.epam.rd.transportcompany.entities.OrderStatus;
 import com.epam.rd.transportcompany.entities.User;
 import com.epam.rd.transportcompany.repositories.*;
+import com.epam.rd.transportcompany.services.OrderService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,24 +102,13 @@ public class JpaOrderService implements OrderService{
         
        return orderList;
     }
+    
     @Transactional
     @Override
     public List<Order> getActiveOrdersByUserID(Long userId) {
         return orderRepository.getActiveOrdersByUserID(userId);
     }
     
-//    @Override
-//    public List<Order> findArchiveOrdersByPhone(String phone) {
-//          List<Order> orderList = orderRepository.findArchiveOrdersByPhone(phone);
-//         
-//        for(Order o: orderList){
-//            if(o.getDriver() != null){
-//                o.getDriver().getUsername();
-//            }
-//        }
-//        return orderList;
-//    }
-
     @Transactional
     @Override
     public Long getActivePagesCount(String phone) {

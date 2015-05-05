@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epam.rd.transportcompany.repositories;
+package com.epam.rd.transportcompany.jparepositories;
 
 import com.epam.rd.transportcompany.entities.User;
+import com.epam.rd.transportcompany.repositories.UserRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,7 +44,7 @@ public class JpaUserRepository implements UserRepository{
     @Override
     public List<User> readAll(Integer pageNumber) {
         Query query = em.createNamedQuery("User.readAll");
-        query.setFirstResult((pageNumber * STRINGS_ON_PAGE));
+        query.setFirstResult(((pageNumber-1) * STRINGS_ON_PAGE));
         query.setMaxResults(STRINGS_ON_PAGE);
  
         return query.getResultList();
@@ -86,6 +87,13 @@ public class JpaUserRepository implements UserRepository{
     @Override
     public User findById(Long userId) {
         return em.find(User.class, userId);
+    }
+
+    @Override
+    public Long getPagesCount() {
+        Query query = em.createNamedQuery("User.getPagesCount");
+        
+        return ((Long)query.getSingleResult()/STRINGS_ON_PAGE);
     }
 
    

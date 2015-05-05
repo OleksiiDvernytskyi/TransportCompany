@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epam.rd.transportcompany.services;
+package com.epam.rd.transportcompany.jpaservices;
 
 import com.epam.rd.transportcompany.entities.User;
-import com.epam.rd.transportcompany.entities.UserRole;
 import com.epam.rd.transportcompany.repositories.UserRepository;
+import com.epam.rd.transportcompany.services.UserService;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -90,6 +88,12 @@ public class JpaUserService implements UserService, UserDetailsService{
         }
         
         return userList;
+    }
+
+    @Transactional
+    @Override
+    public Long getPagesCount() {
+        return userRepository.getPagesCount();
     }
 
 

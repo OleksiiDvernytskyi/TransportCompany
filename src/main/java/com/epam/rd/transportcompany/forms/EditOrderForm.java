@@ -7,7 +7,6 @@ package com.epam.rd.transportcompany.forms;
 
 import com.epam.rd.transportcompany.entities.Order;
 import com.epam.rd.transportcompany.entities.OrderStatus;
-import com.epam.rd.transportcompany.entities.User;
 
 /**
  *

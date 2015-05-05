@@ -39,10 +39,10 @@
             </tr>
             <c:if test="${order.driver != null}">
             <tr>
-                 <td><h3><spring:message code="d_fname"/></h3> </td><td> <h4>${order.driver.firstName}</h4> </td>
+                 <td><h3><spring:message code="d_fname"/></h3> </td><td> <h4>${order.driver.firstname}</h4> </td>
             </tr>
             <tr>
-                 <td><h3><spring:message code="d_lname"/> </h3> </td><td> <h4>${order.driver.lastName}</h4> </td>
+                 <td><h3><spring:message code="d_lname"/> </h3> </td><td> <h4>${order.driver.lastname}</h4> </td>
             </tr>
             <tr>
                  <td><h3><spring:message code="d_phone"/></h3> </td><td> <h4>${order.driver.phone}</h4> </td>

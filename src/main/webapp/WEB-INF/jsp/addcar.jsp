@@ -32,10 +32,13 @@
 <table width="98%">
     <tr><td><span class="error"><form:errors path="brendId" /></span></td></tr>
     <tr>
-        <td><h5> <spring:message code="car_brend"/>: </h5></td> <td><form:select path="brendId" >
-                                                <form:option value="0" label="--- Select ---" />
-                                                <form:options items="${carBrends}" />
-                                            </form:select>
+        <td><h5> <spring:message code="car_brend"/>: </h5></td> 
+        <td>
+            <form:select path="brendId" >
+                <c:forEach items="${brendList}" var="brend">
+                    <form:option value="${bren.brendId}" label="${brend.brendName}" />
+                </c:forEach>
+            </form:select>
         </td>
              
     </tr>

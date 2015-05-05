@@ -7,7 +7,6 @@ package com.epam.rd.transportcompany.services;
 
 import com.epam.rd.transportcompany.entities.Order;
 import com.epam.rd.transportcompany.entities.OrderStatus;
-import com.epam.rd.transportcompany.entities.User;
 import java.util.List;
 
 /**
@@ -19,9 +18,9 @@ public interface OrderService {
     public Long saveOrder(Order order);
 
     public List<Order> getActiveOrders(Integer pageNumber);
+  
     public List<Order> getActiveOrders(Integer pageNumber, String phone);
 
-//    public List<Order> findByPhone(String phone);
     public Order findById(Long id);
 
     public void setDriver(Order order, Long driverId);
@@ -29,12 +28,12 @@ public interface OrderService {
     public void setStatus(Order order, OrderStatus orderStatus);
 
     public List<Order> getArchiveOrders(Integer pageNumber);
+   
     public List<Order> getArchiveOrders(Integer pageNumber, String phone);
 
     public List<Order> getActiveOrdersByUserID(Long userId);
 
-//    public List<Order> findArchiveOrdersByPhone(String phone);
-
     public Long getActivePagesCount(String phone);
+  
     public Long getArchivePagesCount(String phone);
 }

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epam.rd.transportcompany.repositories;
+package com.epam.rd.transportcompany.jparepositories;
 
 import com.epam.rd.transportcompany.entities.CarBrend;
+import com.epam.rd.transportcompany.repositories.CarBrendRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**

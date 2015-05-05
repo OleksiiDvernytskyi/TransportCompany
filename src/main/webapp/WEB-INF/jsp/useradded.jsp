@@ -23,10 +23,10 @@
                 <td><h3><spring:message code="username"/></h3> </td><td><h4> ${newUser.username}</h4></td>
             </tr>
              <tr>
-                <td><h3><spring:message code="fname"/></h3> </td><td><h4> ${newUser.firstName}</h4> </td>
+                <td><h3><spring:message code="fname"/></h3> </td><td><h4> ${newUser.firstname}</h4> </td>
             </tr>
              <tr>
-                 <td><h3><spring:message code="lname"/></h3>  </td><td> <h4>${newUser.lastName}</h4> </td>
+                 <td><h3><spring:message code="lname"/></h3>  </td><td> <h4>${newUser.lastname}</h4> </td>
             </tr>
              <tr>
                  <td><h3><spring:message code="pnumber"/></h3> </td><td> <h4>${newUser.phone}</h4> </td>

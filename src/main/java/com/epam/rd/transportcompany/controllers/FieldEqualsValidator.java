@@ -10,8 +10,6 @@ package com.epam.rd.transportcompany.controllers;
  *
  * @author amd
  */
-import com.epam.rd.transportcompany.controllers.FieldEquals;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -21,12 +19,14 @@ public class FieldEqualsValidator implements ConstraintValidator<FieldEquals, Ob
 	private String equalsTo;
 	private String message = FieldEquals.MESSAGE;
 
+        @Override
 	public void initialize(FieldEquals constraintAnnotation) {
 		this.message = constraintAnnotation.message();
 		this.field = constraintAnnotation.field();
 		this.equalsTo = constraintAnnotation.equalsTo();
 	}
 
+        @Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		try {
 			final Object fieldObject = getProperty(value, field, null);
@@ -67,6 +67,7 @@ public class FieldEqualsValidator implements ConstraintValidator<FieldEquals, Ob
 			Method method = clazz.getDeclaredMethod(methodName, new Class[0]);
 			return method.invoke(value);
 		} catch (Exception e) {
+                    e.printStackTrace();
 		}
 		return defaultValue;
 	}

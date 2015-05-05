@@ -38,16 +38,18 @@ public class ShowUsersController {
     @RequestMapping(value = "/showusers", method = RequestMethod.GET)        
     public ModelAndView showUsers(@RequestParam (value ="p", required = false) Integer pageNumber, ModelAndView model) {
         
-        if(pageNumber ==null || pageNumber< 0){
-            pageNumber = 0;
+        if(pageNumber ==null || pageNumber< 1 ){
+            pageNumber = 1;
         }
+        
+        Long pagesCount = userService.getPagesCount()+1;
+        
+        if(pageNumber > pagesCount )
+            pageNumber= pagesCount.intValue();
         
         List<User> userList = userService.getAllUsers(pageNumber);
        
-        if( pageNumber !=0 && userList.isEmpty()){
-            userList = userService.getAllUsers(--pageNumber);
-            
-        }
+        model.addObject("pagesCount", pagesCount);
         model.addObject("pageNumber", pageNumber);
         model.addObject("userList", userList);
         model.setViewName("showusers");

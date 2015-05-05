@@ -36,9 +36,11 @@ import org.springframework.security.core.userdetails.UserDetails;
     @NamedQuery(name = "User.findByUsername",
             query = "SELECT u FROM User u WHERE u.username = :username "),
     @NamedQuery(name = "User.getActiveDrivers", 
-            query = "SELECT u FROM User u WHERE u.userRole = 'DRIVER' "
+            query = "SELECT u FROM User u WHERE u.userRole = 'DRIVER'"
                 + "AND u.ready = TRUE AND u.car != NULL AND u.car.carCategory >= :carCategory "
-                + "AND u.car.passengers >= :passengers ")
+                + "AND u.car.passengers >= :passengers "),
+    @NamedQuery(name = "User.getPagesCount",
+            query = "SELECT COUNT(u) FROM User u")
 })
 public class User implements Serializable, UserDetails {
     private static final long serialVersionUID = 1L;
@@ -49,8 +51,8 @@ public class User implements Serializable, UserDetails {
     @Column(unique = true)
     private String username;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String phone;
     private boolean ready = false;
     private boolean disabled = false;
@@ -106,20 +108,20 @@ public class User implements Serializable, UserDetails {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
     
     public String getPhone() {
@@ -168,7 +170,7 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + userId + ", username=" + username + ", name=" + firstName + ", secondName=" + lastName + '}';
+        return "User{" + "id=" + userId + ", username=" + username + ", name=" + firstname + ", lastname=" + lastname + '}';
     }
 
     @Override

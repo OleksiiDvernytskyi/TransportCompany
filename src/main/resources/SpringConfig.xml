@@ -15,9 +15,9 @@
        
     <context:annotation-config/>
     
-    <context:component-scan base-package="com.epam.rd.transportcompany.services"/>
+    <context:component-scan base-package="com.epam.rd.transportcompany.jpaservices"/>
     <context:component-scan base-package="com.epam.rd.transportcompany.entities"/>
-    <context:component-scan base-package="com.epam.rd.transportcompany.repositories"/>
+    <!--<context:component-scan base-package="com.epam.rd.transportcompany.jparepositories"/>-->
     
     <bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder"/>
 
@@ -36,24 +36,24 @@
         <property name="jpaProperties">
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQLDialect
-                hibernate.show_sql=true
-                hibernate.format_sql=true
+                <!--hibernate.show_sql=true-->
+                <!--hibernate.format_sql=true-->
             </value>
         </property>
         
     </bean>
     
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="/WEB-INF/jdbc.properties"/>
+        <property name="location" value="classpath:/jdbc.properties"/>
     </bean>
     
-    <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
+<!--    <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
         <property name="driverClassName" value="${driver}"/>
         <property name="url" value="${url}"/>
         <property name="username" value="${user}"/>
         <property name="password" value="${password}"/>
         
-    </bean>
+    </bean>-->
       
                   
 </beans>

@@ -7,7 +7,6 @@ package com.epam.rd.transportcompany.forms;
 
 import com.epam.rd.transportcompany.controllers.FieldEquals;
 import com.epam.rd.transportcompany.entities.User;
-import com.epam.rd.transportcompany.entities.UserRole;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 

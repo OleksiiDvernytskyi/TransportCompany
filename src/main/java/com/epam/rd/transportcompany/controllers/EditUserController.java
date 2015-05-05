@@ -60,8 +60,8 @@ public class EditUserController {
         
         user.setUsername(editUserForm.getUsername());
         
-        user.setFirstName(editUserForm.getFirstname());
-        user.setLastName(editUserForm.getLastname());
+        user.setFirstname(editUserForm.getFirstname());
+        user.setLastname(editUserForm.getLastname());
         user.setPhone(editUserForm.getPhone());
         user.setUserRole(editUserForm.getRole());
         if( ! editUserForm.getPassword().isEmpty() && editUserForm.getPassword().equals(

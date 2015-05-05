@@ -54,11 +54,17 @@
                         </tr>
                         <sec:authorize ifAllGranted="ROLE_DRIVER">
                         <tr>
-                            <td><h5><spring:message code="car"/>: </h5></td><td><form:select path="carId" >
-                                                          <form:option value="0" label="${userCar}" />
-                                                          <form:options items="${carMap}" />
-                                                       </form:select>
-                                                    </td>
+                            <td><h5><spring:message code="car"/>: </h5></td>
+                                <td>
+                                    <form:select path="carId" >
+                                        <c:if test="${editProfileForm.carId == null}">
+                                            <form:option value="0" label="--- Select ---" />
+                                        </c:if>                
+                                        <c:forEach items="${carList}" var="car">
+                                            <form:option value="${car.carId}" label="${car.brend.brendName} ${car.carModel} " />
+                                        </c:forEach>    
+                                    </form:select>
+                                </td>
 
                         </tr>                       
                         </sec:authorize>
