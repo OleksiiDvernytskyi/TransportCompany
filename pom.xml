@@ -240,7 +240,14 @@
         </dependency>
 
 </dependencies>
-
+    <pluginRepositories>
+		<pluginRepository>
+			<id>maven-db-plugin-repo</id>
+			<name>maven db plugin repository</name>
+			<url>http://maven-db-plugin.googlecode.com/svn/maven/repo</url>
+			<layout>default</layout>
+		</pluginRepository>
+    </pluginRepositories>
     <build>
         <plugins>
             <plugin>
@@ -297,19 +304,19 @@
                     <username>maven</username>
                     <password>maven</password>
                     <update>true</update>
-                    <!--<url>http://localhost:8084/manager/text</url>-->
-                    <url>http://localhost/manager/text</url>
+                    <url>http://localhost:8084/manager/text</url>
+                    <!--<url>http://localhost/manager/text</url>-->
                     <path>/TransportCompany</path>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-<!--    <profiles>
+    <profiles>
 
  		<profile> 
  			<id>eclipse</id> 
  			<properties> 
- 				<db.name>epam_store_spring</db.name> 
+ 				<db.name>transport</db.name> 
  				<db.driver>com.mysql.jdbc.Driver</db.driver> 
  				<db.url>jdbc:mysql://localhost:3306/</db.url> 
  				<db.url.name>${db.url}${db.name}</db.url.name> 
@@ -325,7 +332,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<db.name>transport2</db.name>
+				<db.name>transport</db.name>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
 				<db.url>jdbc:mysql://localhost:3306/</db.url>
 				<db.url.name>${db.url}${db.name}</db.url.name>
@@ -356,19 +363,19 @@
 								<password>${db.password}</password>
 							</appDbConnectionSettings>
 							<sqlDelimiter>;</sqlDelimiter>
-							<dbDataScriptsDirectory>
-								<param>src/main/sql/data</param>
-							</dbDataScriptsDirectory>
+<!--							<dbDataScriptsDirectory>
+								<param>src/dbdump</param>
+							</dbDataScriptsDirectory>-->
 							<dbSchemaScriptsDirectory>
-								<param>src/main/sql/schema</param>
+								<param>src/dbdump</param>
 							</dbSchemaScriptsDirectory>
-							<dbUpdateScriptsDirectory>
-								<param>src/main/sql/update</param>
-							</dbUpdateScriptsDirectory>
+<!--							<dbUpdateScriptsDirectory>
+								<param>src/dbdump</param>
+							</dbUpdateScriptsDirectory>-->
 							<dbCreateStatements>
 								CREATE DATABASE IF NOT EXISTS ${db.name};
-								 grant all on ${db.name}.* root@localhost identified by 'root'; 
-								 flush privileges; 
+								 <!--grant all on ${db.name}.* root@localhost identified by 'root';--> 
+								 <!--flush privileges;--> 
 							</dbCreateStatements>
 							<dbDropStatements>DROP DATABASE IF EXISTS ${db.name};</dbDropStatements>
 							<scriptEncoding>UTF-8</scriptEncoding>
@@ -384,8 +391,9 @@
 				</plugins>
 			</build>
 		</profile>
-	</profiles>-->
+	</profiles>
 
+    
     <repositories>
         <repository>
             <id>unknown-jars-temp-repo</id>
