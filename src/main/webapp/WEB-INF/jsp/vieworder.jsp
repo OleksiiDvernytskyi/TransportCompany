@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
+
 
 <%@include file="/WEB-INF/layout/head.jsp" %>  
 <%@include file="/WEB-INF/layout/message.jsp" %> 

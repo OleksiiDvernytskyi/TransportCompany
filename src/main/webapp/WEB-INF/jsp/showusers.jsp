@@ -6,10 +6,10 @@
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.epam.rd.transportcompany.entities.User"%>
+<%@page import="com.amd.transportcompany.entities.User"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 
 <%@include file="/WEB-INF/layout/head.jsp" %>  
 <%@include file="/WEB-INF/layout/message.jsp" %> 

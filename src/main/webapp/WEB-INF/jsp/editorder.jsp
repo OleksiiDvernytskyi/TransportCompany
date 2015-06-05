@@ -8,7 +8,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" type="text/css" href="resources/css/default.css" media="screen"/>
-<!DOCTYPE html>
+
 
 
 <%@include file="/WEB-INF/layout/head.jsp" %>  
@@ -16,16 +16,7 @@
 
 <div class="item">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8">
-        <title>JSP Page</title>
-        <style type="text/css">
-            span.error {
-            color: red;
-        }
-</style>
-    </head>
-    <body>
+     <body>
         <form:form commandName="editOrderForm" method="post">
 
 <h1><spring:message code="order"/> </h1>
@@ -81,7 +72,7 @@
     
     <sec:authorize ifAllGranted="ROLE_DRIVER">
         <tr>
-            <td><h5> <spring:message code="order_compl"/> </h5></td> <td><form:checkbox path="complite"/></td>
+            <td><h5> <spring:message code="order_compl"/> </h5></td> <td><form:checkbox path="Complete"/></td>
         </tr>
     </sec:authorize>   
 </table>

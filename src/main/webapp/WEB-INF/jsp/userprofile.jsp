@@ -11,8 +11,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" type="text/css" href="resources/css/default.css" media="screen"/>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+
 
     <%@include file="/WEB-INF/layout/head.jsp" %>  
     <%@include file="/WEB-INF/layout/message.jsp" %> 

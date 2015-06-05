@@ -3,8 +3,11 @@
     Created on : 04.04.2015, 12:20:05
     Author     : amd
 --%>
-
+<link rel="stylesheet" type="text/css" href="resources/css/default.css" media="screen"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
     <head>

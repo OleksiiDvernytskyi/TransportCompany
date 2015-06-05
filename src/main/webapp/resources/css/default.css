@@ -28,6 +28,10 @@ body {
 	margin: 0;
         
 }
+span.error {
+        color: red;
+}
+
 input {
 	color: #555;
 	font: normal 1.1em "Lucida Sans Unicode",sans-serif;

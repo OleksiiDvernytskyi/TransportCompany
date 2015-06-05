@@ -3,27 +3,25 @@
     Created on : 08.04.2015, 21:30:41
     Author     : amd
 --%>
-
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" type="text/css" href="resources/css/default.css" media="screen"/>
-<!DOCTYPE html>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@include file="/WEB-INF/layout/head.jsp" %>  
 <%@include file="/WEB-INF/layout/message.jsp" %> 
 
-    <div class="item">
-<html>
-    <head>
+
+        <div class="item">
+<!--<html>-->
+<!--    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style type="text/css">
             span.error {
             color: red;
         }
 </style>
-    </head>
+    </head>-->
     <body>
         <form:form commandName="newCarForm" method="post" >
 

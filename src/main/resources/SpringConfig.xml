@@ -15,9 +15,9 @@
        
     <context:annotation-config/>
     
-    <context:component-scan base-package="com.epam.rd.transportcompany.jpaservices"/>
-    <context:component-scan base-package="com.epam.rd.transportcompany.entities"/>
-    <!--<context:component-scan base-package="com.epam.rd.transportcompany.jparepositories"/>-->
+    <context:component-scan base-package="com.amd.transportcompany.jpaservices"/>
+    <context:component-scan base-package="com.amd.transportcompany.entities"/>
+
     
     <bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder"/>
 

@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" type="text/css" href="resources/css/default.css" media="screen"/>
-<!DOCTYPE html>
+
 
 
 <%@include file="/WEB-INF/layout/head.jsp" %>  
@@ -16,16 +16,7 @@
 
 <div class="item">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <style type="text/css">
-            span.error {
-            color: red;
-        }
-</style>
-    </head>
-    <body>
+     <body>
         <form:form commandName="newUserForm" method="post">
 
             <center><h1><spring:message code="u_reg"/></h1></center>

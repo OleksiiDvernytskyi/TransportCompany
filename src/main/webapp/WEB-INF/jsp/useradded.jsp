@@ -6,9 +6,9 @@
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page import="org.springframework.web.servlet.ModelAndView"%>
-<%@page import="com.epam.rd.transportcompany.entities.User"%>
+<%@page import="com.amd.transportcompany.entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 
 <%@include file="/WEB-INF/layout/head.jsp" %>  
 <%@include file="/WEB-INF/layout/message.jsp" %> 
